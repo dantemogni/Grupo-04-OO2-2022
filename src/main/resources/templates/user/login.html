@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head
+    th:replace="fragments/head :: head(title='Login', css='/css/login.css')"
+  >
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <div class="row vh-100 align-content-center align-items-center justify-content-center">
+          <div class="col col-12 col-md-5">
+            <section id="login-page-info">
+              <img th:src="@{/img/unla25.jpg}" alt="man dancing emoji"/>
+              <h1>Bienvenido</h1>
+              <p>Sistema Gestion de Aulas UNLa</p>
+            </section>
+          </div>
+        <div class="col col-12 col-md-5">
+          <aside id="login-form">
+            <h3 class="form-signin-heading" th:text="Login"></h3>
+            <form th:action="@{/loginprocess}" method="POST">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  aria-label="Username"
+                  class="form-control"
+                  placeholder="Username"
+                />
+                <label for="floatingInput">Usuario</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                <label for="floatingPassword">Contraseña</label>
+              </div>
+
+              <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                Usurio o contraseña invalida
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+              </div>
+            </form>
+            <br>
+            <a th:href="@{/register}">Registrarse</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+    <footer th:replace="fragments/footer :: footer"></footer>
+  </body>
+</html>
