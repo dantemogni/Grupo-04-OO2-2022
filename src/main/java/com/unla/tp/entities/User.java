@@ -101,5 +101,4 @@ public class User implements UserDetails {
     // @UpdateTimestamp
     // private LocalDateTime updatedAt;
 
-    // TODO: relacion con departamento
 }

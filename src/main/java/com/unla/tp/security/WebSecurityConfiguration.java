@@ -5,6 +5,7 @@ import com.unla.tp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
@@ -32,8 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/scripts/**",
                         "/img/**",
                         "/webjars/",
-                        "/webjars/**",
-                        "/register")
+                        "/webjars/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -42,6 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/loginsuccess").permitAll()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
+                .and().exceptionHandling().accessDeniedPage("/error/401");
     }
 }
