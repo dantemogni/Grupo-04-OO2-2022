@@ -23,9 +23,9 @@
                 <h1
                 th:utext="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"
               ></h1>
-              <p id="userHeader" th:text="'Usuario: @' + ${username}"></p>
+              <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>
-            
+              <a th:if="${userRole} == 'ROLE_ADMIN'" th:href="@{/register}">Registar usuario nuevo</a>
           </div>
           <br />
           </div>
