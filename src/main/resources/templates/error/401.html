@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head
+    th:replace="fragments/head :: head(title='Error', css='/css/registration.css')"
+  >
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="row vh-100 align-items-center justify-content-center">
+          <div class="col">
+            <h1>No tiene acceso a este recurso</h1>
+            <p>401 - Unauthorized</p>
+            <a
+              th:href="@{/index}"
+              class="btn btn-md btn-primary btn-block"
+              type="Submit"
+              >Inicio</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+  </body>
+</html>
