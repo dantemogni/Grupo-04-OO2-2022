@@ -56,20 +56,14 @@ CREATE TABLE IF NOT EXISTS `bd_gestion_aulas`.`usuario` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `enabled` BIT(1) NOT NULL DEFAULT 0,
-  `id_departamento` BIGINT NOT NULL,
   INDEX `fk_Usuario_Role_idx` (`id_role` ASC) VISIBLE,
-  INDEX `fk_Usuario_Departamento1_idx` (`id_departamento` ASC) VISIBLE,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   CONSTRAINT `fk_Usuario_Role`
     FOREIGN KEY (`id_role`)
     REFERENCES `bd_gestion_aulas`.`rol` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Usuario_Departamento1`
-    FOREIGN KEY (`id_departamento`)
-    REFERENCES `bd_gestion_aulas`.`departamento` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION
+    );
 
 -- -----------------------------------------------------
 -- Table `bd_gestion_aulas`.`edificio`
