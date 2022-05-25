@@ -2,6 +2,7 @@ package com.unla.tp.services.implementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.unla.tp.entities.User;
 import com.unla.tp.models.UserSignUpRequest;
@@ -65,6 +66,13 @@ public class UserServiceImpl implements UserService {
     public User getByUsername(String username) {
         return userRepository.findOneByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with username - " + username + ", not found"));
+    }
+
+
+    
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
 }

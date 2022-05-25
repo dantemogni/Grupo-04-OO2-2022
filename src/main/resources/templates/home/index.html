@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head th:replace="fragments/head :: head(title='Home', css='/css/home.css')">
-    <title>Bienvenido</title>
 </head>
 
 <body>
@@ -18,7 +17,7 @@
             <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25"/>
             <div>
                 <h1
-                th:utext="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"
+                th:text="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"
               ></h1>
               <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>

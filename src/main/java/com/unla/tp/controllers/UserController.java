@@ -60,6 +60,10 @@ public class UserController {
 
     @GetMapping("/userLst")
     public ModelAndView lstUsuarios(){
-        return new ModelAndView(ViewRouteHelper.USERS_LST);
+        ModelAndView mV = new ModelAndView(ViewRouteHelper.USERS_LST);
+        mV.addObject("users", userService.getAll());
+        //System.err.println(userService.getAll());
+        mV.addObject("user", new UserSignUpRequest());
+        return mV;
     }
 }
