@@ -12,4 +12,6 @@ public class UserSignUpRequest {
     private String tipoDocumento;
     private Double nroDocumento;
     private int roleId; // ver
+
+   
 }

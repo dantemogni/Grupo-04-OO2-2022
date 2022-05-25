@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<body>
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <!-- <th>Índice</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user : ${users}">
+                                <td><span th:text="${user.nombre}"></span></td>
+                                <td><span th:text="${user.apellido}"></span></td>
+                                <!-- <td th:text="${user.index}"></td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <br />
+        </div>
+    </div>
+</body>
+
+</html>

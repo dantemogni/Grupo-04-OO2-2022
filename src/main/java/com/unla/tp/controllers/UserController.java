@@ -58,4 +58,12 @@ public class UserController {
         return "redirect:/index";
     }
 
+    @GetMapping("/userLst")
+    public ModelAndView lstUsuarios(){
+        ModelAndView mV = new ModelAndView(ViewRouteHelper.USERS_LST);
+        mV.addObject("users", userService.getAll());
+        //System.err.println(userService.getAll());
+        mV.addObject("user", new UserSignUpRequest());
+        return mV;
+    }
 }

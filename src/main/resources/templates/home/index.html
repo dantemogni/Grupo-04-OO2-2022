@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
-  lang="en"
->
-  <head th:replace="fragments/head :: head(title='Home', css='/css/home.css')">
-  </head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
-  <body>
+<head th:replace="fragments/head :: head(title='Home', css='/css/home.css')">
+</head>
+
+<body>
     <div class="container">
-      <nav class="nav justify-content-end">
-        <a class="nav-link" th:href="@{/logout}"
-          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
         >
       </nav>
 
@@ -21,20 +17,23 @@
             <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25"/>
             <div>
                 <h1
-                th:utext="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"
+                th:text="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"
               ></h1>
               <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>
               <a th:if="${userRole} == 'ROLE_ADMIN'" th:href="@{/register}">Registar usuario nuevo</a>
-          </div>
-          <br />
-          </div>
-        </div>
-      </div>
+            <!-- TODO: AUDITORES TMB PUEDEN VER LISTA DE USUARIOS-->
+            <a th:if="${userRole} == 'ROLE_ADMIN' " th:href="@{/userLst}">Ver lista de usuarios</a>
     </div>
+    <br />
+    </div>
+    </div>
+    </div>
+
 
     <footer th:replace="fragments/footer :: footer"></footer>
 
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
-  </body>
+</body>
+
 </html>
