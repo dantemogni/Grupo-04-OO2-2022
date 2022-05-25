@@ -62,7 +62,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    // TODO
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = new HashSet<>();
@@ -89,16 +89,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-
-    // @Column
-    // private Boolean deleted = Boolean.FALSE;
-
-    // @Column(nullable = false)
-    // @CreationTimestamp
-    // private LocalDateTime createdAt;
-
-    // @Column
-    // @UpdateTimestamp
-    // private LocalDateTime updatedAt;
 
 }
