@@ -10,6 +10,7 @@ import com.unla.tp.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping(value = "/login")
     public ModelAndView login() {
@@ -90,7 +94,7 @@ public class UserController {
         public String actualizar(@Valid User usuario, BindingResult bindingResult, ModelMap mp){
             User user = userService.findById(usuario.getId());
             user.setNombre(usuario.getNombre());
-            user.setPassword(usuario.getPassword());
+            user.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
             user.setEmail(usuario.getEmail());
             user.setApellido(usuario.getApellido());
             user.setTipoDocumento(usuario.getTipoDocumento());
