@@ -12,7 +12,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -58,4 +60,19 @@ public class UserController {
         return "redirect:/index";
     }
 
+    @GetMapping("/userLst")
+    public ModelAndView lstUsuarios(){
+        ModelAndView mV = new ModelAndView(ViewRouteHelper.USERS_LST);
+        mV.addObject("users", userService.getAll());
+        //System.err.println(userService.getAll());
+        mV.addObject("user", new UserSignUpRequest());
+        return mV;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") int id) {
+        System.err.println(userService.findById(id).getApellido());
+        userService.remove(id);
+        return "redirect:/index";
+    }
 }

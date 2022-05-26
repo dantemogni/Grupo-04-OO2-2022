@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<body>
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.nombre}"></td>
+                                <td th:text="${user.apellido}"></td>
+                                <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
+                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <br />
+        </div>
+    </div>
+</body>
+
+</html>

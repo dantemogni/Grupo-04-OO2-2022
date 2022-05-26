@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class UserSignUpRequest {
+    //PARA MOSTRAR EL ID EN userLst.html Y PODER HACER LA BAJA
+    private int idUser;
     private String nombre;
     private String apellido;
     private String username;
@@ -11,5 +13,7 @@ public class UserSignUpRequest {
     private String email;
     private String tipoDocumento;
     private Double nroDocumento;
-    private int roleId; // ver
+    private int roleId; 
+
+   
 }
