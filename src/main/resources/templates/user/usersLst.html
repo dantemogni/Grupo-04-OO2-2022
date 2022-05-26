@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
-
 <body>
     <div class="panel-group">
         <div class="panel panel-primary">
@@ -22,7 +21,7 @@
                                 <td th:text="${user.nombre}"></td>
                                 <td th:text="${user.apellido}"></td>
                                 <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
-                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger" th:onclick="if(!(confirm('¿Quiere eliminar a este usuario?') )) return false">Delete</a></td>
                             </tr>
                         </tbody>
                     </table>
