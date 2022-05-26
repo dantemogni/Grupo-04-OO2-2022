@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class UserController {
@@ -79,9 +81,24 @@ public class UserController {
     }
     
     @GetMapping("/modify/{id}")
-    public ModelAndView modifyUser(@PathVariable("id") int id){
-        ModelAndView mV = new ModelAndView(ViewRouteHelper.EDIT);
-        mV.addObject(userService.findById(id));
-        return mV;
+    public String modifyUser(@PathVariable("id") int id, ModelMap mp){
+        mp.put("user", userService.findById(id));
+        return "user/editUser";
     }
+
+    @PostMapping("/update")
+        public String actualizar(@Valid User usuario, BindingResult bindingResult, ModelMap mp){
+            User user = userService.findById(usuario.getId());
+            user.setNombre(usuario.getNombre());
+            user.setPassword(usuario.getPassword());
+            user.setEmail(usuario.getEmail());
+            user.setApellido(usuario.getApellido());
+            user.setTipoDocumento(usuario.getTipoDocumento());
+            user.setUsername(usuario.getUsername());
+            user.setNroDocumento(usuario.getNroDocumento());
+            userService.save(user);
+    
+        return "redirect:/index";
+}
+    
 }

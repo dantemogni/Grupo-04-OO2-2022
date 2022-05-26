@@ -101,5 +101,11 @@ public class UserServiceImpl implements UserService {
         return u;
     }
 
+    @Override
+    public User save(User user) {
+       return userRepository.save(user);
+        
+    }
+
 
 }
