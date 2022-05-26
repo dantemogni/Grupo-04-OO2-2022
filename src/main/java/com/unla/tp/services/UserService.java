@@ -16,6 +16,9 @@ public interface UserService extends UserDetailsService {
 
     public boolean remove(int id);
 
-    public User findById(int id);
+    public  User findById(int id);
+
+    //METODO PARA UPDATE
+    public User save(User user);
 
 }

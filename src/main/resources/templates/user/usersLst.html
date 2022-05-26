@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
-
 <body>
     <div class="panel-group">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
                 <div>
-                    <table>
+                    <table width="1000" border="2">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
+                                <th align="justify">Nombre</th>
+                                <th align="justify">Apellido</th>
+                                <th align="justify">Modificar</th>
+                                <th align="justify">Eliminar</th>
 
                             </tr>
                         </thead>
@@ -21,7 +22,8 @@
                                 <td th:text="${user.nombre}"></td>
                                 <td th:text="${user.apellido}"></td>
                                 <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
-                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+                                <td><a th:href="@{/modify/{id}(id=${user.id})}" class="btn btn-danger">Modify</a></td>
+                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger" th:onclick="if(!(confirm('¿Quiere eliminar a este usuario?') )) return false">Delete</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -31,6 +33,7 @@
             <br />
         </div>
     </div>
+    <a th:href="@{/index}" class="btn btn-primary">Volver</a>
 </body>
 
 </html>
