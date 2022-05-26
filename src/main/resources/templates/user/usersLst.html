@@ -8,11 +8,12 @@
             <div class="panel-heading">
                 <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
                 <div>
-                    <table>
+                    <table width="300" border="2">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
+                                <th align="justify">Nombre</th>
+                                <th align="justify">Apellido</th>
+                                <th align="justify">Eliminar</th>
 
                             </tr>
                         </thead>
@@ -31,6 +32,7 @@
             <br />
         </div>
     </div>
+    <a th:href="@{/index}" class="btn btn-primary">Volver</a>
 </body>
 
 </html>

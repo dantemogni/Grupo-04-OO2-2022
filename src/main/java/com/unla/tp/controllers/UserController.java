@@ -71,8 +71,9 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        System.err.println(userService.findById(id).getApellido());
+        //System.err.println(userService.findById(id).getApellido());
         userService.remove(id);
         return "redirect:/index";
     }
+    
 }
