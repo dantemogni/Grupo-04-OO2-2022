@@ -7,11 +7,12 @@
             <div class="panel-heading">
                 <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
                 <div>
-                    <table width="300" border="2">
+                    <table width="1000" border="2">
                         <thead>
                             <tr>
                                 <th align="justify">Nombre</th>
                                 <th align="justify">Apellido</th>
+                                <th align="justify">Modificar</th>
                                 <th align="justify">Eliminar</th>
 
                             </tr>
@@ -21,6 +22,7 @@
                                 <td th:text="${user.nombre}"></td>
                                 <td th:text="${user.apellido}"></td>
                                 <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
+                                <td><a th:href="@{/modify/{id}(id=${user.id})}" class="btn btn-danger">Modify</a></td>
                                 <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger" th:onclick="if(!(confirm('¿Quiere eliminar a este usuario?') )) return false">Delete</a></td>
                             </tr>
                         </tbody>
