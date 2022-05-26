@@ -13,14 +13,15 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <!-- <th>Índice</th> -->
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="user : ${users}">
-                                <td><span th:text="${user.nombre}"></span></td>
-                                <td><span th:text="${user.apellido}"></span></td>
-                                <!-- <td th:text="${user.index}"></td> -->
+                                <td th:text="${user.nombre}"></td>
+                                <td th:text="${user.apellido}"></td>
+                                <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
+                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
                             </tr>
                         </tbody>
                     </table>

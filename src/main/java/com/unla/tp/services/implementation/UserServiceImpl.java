@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.ToString;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -74,5 +76,31 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public boolean remove(int id) {
+        try {
+            userRepository.deleteById(id);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+
+    }
+
+    @Override
+    public User findById(int id) {
+        List<User> lst = getAll();
+        int i = 0;
+        User u = null;
+        while(i<lst.size() && u == null){
+            if(lst.get(i).getId() == id){
+                u = lst.get(i);
+            }
+            i++;
+        }
+        return u;
+    }
+
 
 }
