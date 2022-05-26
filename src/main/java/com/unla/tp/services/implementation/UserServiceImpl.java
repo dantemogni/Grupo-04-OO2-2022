@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import lombok.ToString;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -100,6 +99,12 @@ public class UserServiceImpl implements UserService {
             i++;
         }
         return u;
+    }
+
+    @Override
+    public User save(User user) {
+       return userRepository.save(user);
+        
     }
 
 
