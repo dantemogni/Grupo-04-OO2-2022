@@ -3,6 +3,7 @@ package com.unla.tp.controllers;
 import javax.validation.Valid;
 
 import com.unla.tp.controllers.helpers.ViewRouteHelper;
+import com.unla.tp.entities.User;
 import com.unla.tp.models.UserSignUpRequest;
 import com.unla.tp.models.validator.UserSignUpRequestValidator;
 import com.unla.tp.services.UserService;
@@ -10,6 +11,7 @@ import com.unla.tp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,4 +78,10 @@ public class UserController {
         return "redirect:/index";
     }
     
+    @GetMapping("/modify/{id}")
+    public ModelAndView modifyUser(@PathVariable("id") int id){
+        ModelAndView mV = new ModelAndView(ViewRouteHelper.EDIT);
+        mV.addObject(userService.findById(id));
+        return mV;
+    }
 }
