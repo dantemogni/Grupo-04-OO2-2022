@@ -14,7 +14,7 @@ public interface UserService extends UserDetailsService {
 
     public List<User> getAll();
 
-    public boolean remove(int id);
+    public void remove(int id);
 
     public  User findById(int id);
 

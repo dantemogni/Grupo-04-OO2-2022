@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -70,10 +70,12 @@ public class UserController {
 
     @GetMapping("/userLst")
     public ModelAndView lstUsuarios(){
+
         ModelAndView mV = new ModelAndView(ViewRouteHelper.USERS_LST);
         mV.addObject("users", userService.getAll());
-        //System.err.println(userService.getAll());
         mV.addObject("user", new UserSignUpRequest());
+
+
         return mV;
     }
 
