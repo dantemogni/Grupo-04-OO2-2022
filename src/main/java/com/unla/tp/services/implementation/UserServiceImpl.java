@@ -77,14 +77,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean remove(int id) {
-        try {
-            userRepository.deleteById(id);
-            return true;
-        }catch(Exception e){
-            return false;
-        }
-
+    public void remove(int id) {
+        userRepository.deleteById(id);
     }
 
     @Override
