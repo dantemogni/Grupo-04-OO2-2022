@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,8 +29,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Builder
+//SOBREESCRIBE EL COMANDO delete CONVIRTIÉNDOLE EN UN update
+@SQLDelete(sql = "UPDATE usuario SET enabled = false WHERE id = ?")
+//CUANDO SE LEAN LOS USUARIOS, SE IGNORARAN LOS QUE TENGAN enabled = false
+@Where (clause = "enabled=true")
 @Table(name = "usuario")
-// @Where(clause = "deleted = false")
+
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,8 +61,11 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Double nroDocumento;
 
+
+    //COLUMNA PARA BORRADO LÓGICO CON @Builde.Default PARA QUE @BUILDER NO IGNORE SU INICIALIZACIÓN DE TRUE.
     @Column(nullable = false)
-    private boolean enabled;
+    @Builder.Default
+    private boolean enabled = Boolean.TRUE;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false) // ver el "EAGER"
     @JoinColumn(name = "id_role")
