@@ -22,7 +22,7 @@
               <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>
               <a th:if="${userRole} == 'ROLE_ADMIN'" th:href="@{/register}">Registar usuario nuevo</a>
-            <!-- TODO: AUDITORES TMB PUEDEN VER LISTA DE USUARIOS-->
+            <!--AUDITORES TMB PUEDEN VER LISTA DE USUARIOS-->
             <a th:if="${userRole} == 'ROLE_ADMIN' OR ${userRole} == 'ROLE_AUDITOR'" th:href="@{/userLst}">Ver lista de usuarios</a>
     </div>
     <br />

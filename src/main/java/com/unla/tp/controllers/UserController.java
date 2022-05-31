@@ -10,6 +10,7 @@ import com.unla.tp.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -71,17 +72,16 @@ public class UserController {
     @GetMapping("/userLst")
     public ModelAndView lstUsuarios(){
 
+        
         ModelAndView mV = new ModelAndView(ViewRouteHelper.USERS_LST);
         mV.addObject("users", userService.getAll());
         mV.addObject("user", new UserSignUpRequest());
-
-
+        
         return mV;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        //System.err.println(userService.findById(id).getApellido());
         userService.remove(id);
         return "redirect:/index";
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <body>
     <div class="panel-group">
@@ -7,13 +7,18 @@
             <div class="panel-heading">
                 <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
                 <div>
+
+
                     <table width="1000" border="2">
                         <thead>
                             <tr>
                                 <th align="justify">Nombre</th>
                                 <th align="justify">Apellido</th>
-                                <th align="justify">Modificar</th>
-                                <th align="justify">Eliminar</th>
+
+                                <!-- SOLO ADMINISTRADORES PUEDEN MODIFICAR Y ELIMINAR USUARIOS -->
+                                <th align="justify" sec:authorize="hasRole('ROLE_ADMIN')">Modificar</th>
+                                <th align="justify" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+
 
                             </tr>
                         </thead>
@@ -22,8 +27,10 @@
                                 <td th:text="${user.nombre}"></td>
                                 <td th:text="${user.apellido}"></td>
                                 <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
-                                <td><a th:href="@{/modify/{id}(id=${user.id})}" class="btn btn-danger">Modify</a></td>
-                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger" th:onclick="if(!(confirm('¿Quiere eliminar a este usuario?') )) return false">Delete</a></td>
+
+                                <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/modify/{id}(id=${user.id})}" class="btn btn-danger">Modify</a></td>
+                                <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger" th:onclick="if(!(confirm('¿Quiere eliminar a este usuario?') )) return false">Delete</a></td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -34,6 +41,7 @@
         </div>
     </div>
     <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+    <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
 </body>
 
 </html>
