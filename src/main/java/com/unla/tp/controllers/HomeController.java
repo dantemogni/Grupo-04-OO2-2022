@@ -17,7 +17,7 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = { "/index", "/" })
+    @GetMapping(value = { "index", "/" })
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
