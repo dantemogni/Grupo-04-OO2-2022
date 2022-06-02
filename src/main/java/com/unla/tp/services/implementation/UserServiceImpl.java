@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -34,8 +33,8 @@ public class UserServiceImpl implements UserService {
     public User createUser(UserSignUpRequest userRequest) {
         User user = new User();
 
-        user.setNombre(userRequest.getNombre());
-        user.setApellido(userRequest.getApellido());
+        user.setNombre(capitalize(userRequest.getNombre()));
+        user.setApellido(capitalize(userRequest.getApellido()));
         user.setEmail(userRequest.getEmail());
         user.setNroDocumento(userRequest.getNroDocumento());
         user.setTipoDocumento(userRequest.getTipoDocumento());
@@ -69,8 +68,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("User with username - " + username + ", not found"));
     }
 
-
-    
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
@@ -86,8 +83,8 @@ public class UserServiceImpl implements UserService {
         List<User> lst = getAll();
         int i = 0;
         User u = null;
-        while(i<lst.size() && u == null){
-            if(lst.get(i).getId() == id){
+        while (i < lst.size() && u == null) {
+            if (lst.get(i).getId() == id) {
                 u = lst.get(i);
             }
             i++;
@@ -97,9 +94,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-       return userRepository.save(user);
-        
+        return userRepository.save(user);
+
     }
 
+    private static String capitalize(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
 
 }
