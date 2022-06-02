@@ -2,26 +2,22 @@ package com.unla.tp.controllers;
 
 import javax.validation.Valid;
 
-import com.unla.tp.controllers.helpers.ViewRouteHelper;
-import com.unla.tp.entities.User;
-import com.unla.tp.models.UserSignUpRequest;
-import com.unla.tp.models.validator.UserSignUpRequestValidator;
-import com.unla.tp.services.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.unla.tp.controllers.helpers.ViewRouteHelper;
+import com.unla.tp.entities.User;
+import com.unla.tp.models.UserRequest;
+import com.unla.tp.models.validator.UserRequestValidator;
+import com.unla.tp.services.UserService;
 
 @Controller
 public class UserController {
@@ -40,17 +36,17 @@ public class UserController {
     @GetMapping(value = "/register")
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.USER_REGISTRATION);
-        modelAndView.addObject("userSignUpRequest", new UserSignUpRequest());
+        modelAndView.addObject("userSignUpRequest", new UserRequest());
         return modelAndView;
     }
 
     @PostMapping(value = "/register")
-    public ModelAndView createNewUser(@Valid UserSignUpRequest user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid UserRequest user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.USER_REGISTRATION);
 
         modelAndView.addObject("userSignUpRequest", user);
 
-        UserSignUpRequestValidator uv = new UserSignUpRequestValidator(userService);
+        UserRequestValidator uv = new UserRequestValidator(userService);
         uv.validate(user, bindingResult);
 
         // checks empty value errors
@@ -70,41 +66,65 @@ public class UserController {
     }
 
     @GetMapping("/userLst")
-    public ModelAndView lstUsuarios(){
+    public ModelAndView lstUsuarios() {
 
-        
         ModelAndView mV = new ModelAndView(ViewRouteHelper.USERS_LST);
         mV.addObject("users", userService.getAll());
-        mV.addObject("user", new UserSignUpRequest());
-        
+        mV.addObject("user", new UserRequest());
+
         return mV;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.remove(id);
         return "redirect:/index";
     }
-    
+
+    @Secured("ROLE_ADMIN")
     @GetMapping("/modify/{id}")
-    public String modifyUser(@PathVariable("id") int id, ModelMap mp){
-        mp.put("user", userService.findById(id));
-        return "user/editUser";
+    public ModelAndView modifyUser(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.USER_EDIT);
+
+        User user = userService.findById(id);
+
+        UserRequest userRequest = UserRequest.builder()
+                .idUser(user.getId())
+                .nombre(user.getNombre())
+                .apellido(user.getApellido())
+                .email(user.getEmail())
+                .tipoDocumento(user.getTipoDocumento())
+                .nroDocumento(user.getNroDocumento())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roleId(user.getRole().getId())
+                .build();
+
+        modelAndView.addObject("user", userRequest);
+        return modelAndView;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/update")
-        public String actualizar(@Valid User usuario, BindingResult bindingResult, ModelMap mp){
-            User user = userService.findById(usuario.getId());
-            user.setNombre(usuario.getNombre());
-            user.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
-            user.setEmail(usuario.getEmail());
-            user.setApellido(usuario.getApellido());
-            user.setTipoDocumento(usuario.getTipoDocumento());
-            user.setUsername(usuario.getUsername());
-            user.setNroDocumento(usuario.getNroDocumento());
-            userService.save(user);
-    
-        return "redirect:/index";
-}
-    
+    public ModelAndView actualizar(@Valid @ModelAttribute("user") UserRequest user, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.USER_EDIT);
+
+        modelAndView.addObject("user", user);
+
+        UserRequestValidator uv = new UserRequestValidator(userService);
+        uv.validateUpdate(user, bindingResult);
+
+        // checks empty value errors
+        if (bindingResult.hasErrors()) {
+            return modelAndView;
+        }
+
+        userService.updateUser(user);
+
+        modelAndView.addObject("successMessage", "Usuario actualizado con éxito");
+
+        return modelAndView;
+    }
+
 }
