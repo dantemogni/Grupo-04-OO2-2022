@@ -1,47 +1,89 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
+<head th:replace="fragments/head :: head(title='Listado ', css='/css/registration.css')">
+    </head>
+
 <body>
-    <div class="panel-group">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
-                <div>
-
-
-                    <table width="1000" border="2">
+    <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                    <div>
+                        <h1>Listado de usuarios</h1>
+                      </div>
+                </div>
+                <div class="panel-body">
+                    <table
+                        class="table table-borderless table-hover table-responsive-md"
+                        th:unless="${#lists.isEmpty(users)}"
+                        aria-describedby="User's todos"
+                        >
                         <thead>
                             <tr>
-                                <th align="justify">Nombre</th>
-                                <th align="justify">Apellido</th>
-
-                                <!-- SOLO ADMINISTRADORES PUEDEN MODIFICAR Y ELIMINAR USUARIOS -->
-                                <th align="justify" sec:authorize="hasRole('ROLE_ADMIN')">Modificar</th>
-                                <th align="justify" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
-
-
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Documento</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')" class="w-auto" scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="user : ${users}">
-                                <td th:text="${user.nombre}"></td>
-                                <td th:text="${user.apellido}"></td>
-                                <!-- SE PASA A LA CONTROLADORA EL ID DEL USUARIO EN LA BD -->
-
-                                <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/modify/{id}(id=${user.id})}" class="btn btn-danger">Modify</a></td>
-                                <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger" th:onclick="if(!(confirm('¿Quiere eliminar a este usuario?') )) return false">Delete</a></td>
-
+                            <tr th:each="user: ${users}">
+                            <td
+                                th:text="${user.getNombre}"
+                            ></td>
+                            <td
+                                th:text="${user.getApellido}"
+                            ></td>
+                            <td
+                                th:text="${user.getEmail}"
+                            ></td>
+                            <td
+                                th:text="'@'+${user.getUsername}"
+                            ></td>
+                            <td
+                                th:text="${#strings.toUpperCase(user.getTipoDocumento)}+':'+' '+${user.getNroDocumento}"
+                            ></td>
+                            <td>
+                                <a
+                                sec:authorize="hasRole('ROLE_ADMIN')"
+                                role="button"
+                                class="btn btn-outline-warning btn-sm"
+                                th:href="@{/modify/{id}(id=${user.getId})}"
+                                >
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <button
+                                sec:authorize="hasRole('ROLE_ADMIN')"
+                                type="button"
+                                id="delete"
+                                class="btn btn-outline-danger btn-sm"
+                                data-bs-toggle="modal"
+                                th:data-content="${user.getNombre}+' '+${user.getApellido}"
+                                th:data-id="${user.getId}"
+                                data-bs-target="#deleteModal"
+                                >
+                                <i class="far fa-trash-alt"></i>
+                                </button>
+                            </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
-            <br />
         </div>
-    </div>
     <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+    <!-- Delete Modal -->
+    <div th:replace="fragments/modals :: delete"></div>
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
+
 </body>
 
 </html>
