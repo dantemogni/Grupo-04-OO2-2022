@@ -21,9 +21,8 @@
               ></h1>
               <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>
-              <a th:if="${userRole} == 'ROLE_ADMIN'" th:href="@{/register}">Registar usuario nuevo</a>
-            <!--AUDITORES TMB PUEDEN VER LISTA DE USUARIOS-->
-            <a th:if="${userRole} == 'ROLE_ADMIN' OR ${userRole} == 'ROLE_AUDITOR'" th:href="@{/userLst}">Ver lista de usuarios</a>
+              <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn btn-outline-secondary">Registar usuario nuevo</button>
+              <button sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')" type="button" class="btn btn-outline-secondary">Ver lista de usuarios</button>
     </div>
     <br />
     </div>
