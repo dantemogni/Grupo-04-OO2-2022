@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.unla.tp.entities.User;
-import com.unla.tp.models.UserSignUpRequest;
+import com.unla.tp.models.UserRequest;
 import com.unla.tp.respositories.RoleRepository;
 import com.unla.tp.respositories.UserRepository;
 import com.unla.tp.services.UserService;
@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,11 +30,11 @@ public class UserServiceImpl implements UserService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User createUser(UserSignUpRequest userRequest) {
+    public User createUser(UserRequest userRequest) {
         User user = new User();
 
-        user.setNombre(userRequest.getNombre());
-        user.setApellido(userRequest.getApellido());
+        user.setNombre(capitalize(userRequest.getNombre()));
+        user.setApellido(capitalize(userRequest.getApellido()));
         user.setEmail(userRequest.getEmail());
         user.setNroDocumento(userRequest.getNroDocumento());
         user.setTipoDocumento(userRequest.getTipoDocumento());
@@ -69,8 +68,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("User with username - " + username + ", not found"));
     }
 
-
-    
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
@@ -81,25 +78,54 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    // @Override
+    // public User findById(int id) {
+    // List<User> lst = getAll();
+    // int i = 0;
+    // User u = null;
+    // while (i < lst.size() && u == null) {
+    // if (lst.get(i).getId() == id) {
+    // u = lst.get(i);
+    // }
+    // i++;
+    // }
+    // return u;
+    // }
+
     @Override
     public User findById(int id) {
-        List<User> lst = getAll();
-        int i = 0;
-        User u = null;
-        while(i<lst.size() && u == null){
-            if(lst.get(i).getId() == id){
-                u = lst.get(i);
-            }
-            i++;
-        }
-        return u;
+        return userRepository.findById(id).orElseThrow();
     }
 
     @Override
     public User save(User user) {
-       return userRepository.save(user);
-        
+        return userRepository.save(user);
+
     }
 
+    private static String capitalize(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
+    @Override
+    public User updateUser(UserRequest userRequest) {
+        User user = findById(userRequest.getIdUser());
+
+        user.setNombre(capitalize(userRequest.getNombre()));
+        user.setApellido(capitalize(userRequest.getApellido()));
+        user.setEmail(userRequest.getEmail());
+        user.setNroDocumento(userRequest.getNroDocumento());
+        user.setTipoDocumento(userRequest.getTipoDocumento());
+        user.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
+        user.setUsername(userRequest.getUsername());
+        // user.setRole(roleRepository.getById(userRequest.getRoleId()));
+        // user.setEnabled(true);
+
+        return userRepository.save(user);
+    }
 
 }

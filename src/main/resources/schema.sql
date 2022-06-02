@@ -193,9 +193,11 @@ CREATE TABLE IF NOT EXISTS `bd_gestion_aulas`.`nota_pedido` (
   `id_carrera` BIGINT NOT NULL,
   `id_aula` BIGINT NOT NULL,
   `id_materia` BIGINT NOT NULL,
+  `id_usuario` BIGINT NOT NULL,
   INDEX `fk_NotaPedido_Carrera1_idx` (`id_carrera` ASC) VISIBLE,
   INDEX `fk_NotaPedido_aula1_idx` (`id_aula` ASC) VISIBLE,
   INDEX `fk_NotaPedido_Materia1_idx` (`id_materia` ASC) VISIBLE,
+  INDEX `fk_nota_pedido_usuario1_idx` (`id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_NotaPedido_Carrera1`
     FOREIGN KEY (`id_carrera`)
     REFERENCES `bd_gestion_aulas`.`carrera` (`id`)
@@ -209,6 +211,11 @@ CREATE TABLE IF NOT EXISTS `bd_gestion_aulas`.`nota_pedido` (
   CONSTRAINT `fk_NotaPedido_Materia1`
     FOREIGN KEY (`id_materia`)
     REFERENCES `bd_gestion_aulas`.`materia` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_nota_pedido_usuario1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `bd_gestion_aulas`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     );
