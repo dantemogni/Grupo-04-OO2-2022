@@ -28,7 +28,21 @@ public class HomeController {
         modelAndView.addObject("nombre", userEntity.getNombre());
         modelAndView.addObject("apellido", userEntity.getApellido());
 
-        modelAndView.addObject("userRole", userDetails.getAuthorities().stream().toArray()[0].toString());
+        String userRole = userDetails.getAuthorities().stream().toArray()[0].toString();
+
+        if (userRole.equals("ROLE_ADMIN")) {
+            userRole = "Administrador";
+        } else if (userRole.equals("ROLE_AUDITOR")) {
+            userRole = "Auditor";
+        } else if (userRole.equals("ROLE_PROFESOR")) {
+            userRole = "Profesor";
+        } else if (userRole.equals("ROLE_ASISTENTE")) {
+            userRole = "Asistente";
+        } else if (userRole.equals("ROLE_ALUMNO")) {
+            userRole = "Alumno";
+        }
+
+        modelAndView.addObject("userRole", userRole);
 
         return modelAndView;
     }
