@@ -29,10 +29,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Builder
-//SOBREESCRIBE EL COMANDO delete CONVIRTIÉNDOLE EN UN update
+// SOBREESCRIBE EL COMANDO delete CONVIRTIÉNDOLE EN UN update
 @SQLDelete(sql = "UPDATE usuario SET enabled = false WHERE id = ?")
-//CUANDO SE LEAN LOS USUARIOS, SE IGNORARAN LOS QUE TENGAN enabled = false
-@Where (clause = "enabled=true")
+// CUANDO SE LEAN LOS USUARIOS, SE IGNORARAN LOS QUE TENGAN enabled = false
+@Where(clause = "enabled=true")
 @Table(name = "usuario")
 
 public class User implements UserDetails {
@@ -61,8 +61,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Double nroDocumento;
 
-
-    //COLUMNA PARA BORRADO LÓGICO CON @Builde.Default PARA QUE @BUILDER NO IGNORE SU INICIALIZACIÓN DE TRUE.
+    // COLUMNA PARA BORRADO LÓGICO CON @Builde.Default PARA QUE @BUILDER NO IGNORE
+    // SU INICIALIZACIÓN DE TRUE.
     @Column(nullable = false)
     @Builder.Default
     private boolean enabled = Boolean.TRUE;
@@ -71,7 +71,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = new HashSet<>();
@@ -97,6 +96,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public String getFullName() {
+        return this.getNombre() + ' ' + this.getApellido();
     }
 
 }

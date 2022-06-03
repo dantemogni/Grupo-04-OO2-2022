@@ -21,8 +21,8 @@
               ></h1>
               <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>
-              <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn btn-outline-secondary">Registar usuario nuevo</button>
-              <button sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')" type="button" class="btn btn-outline-secondary">Ver lista de usuarios</button>
+              <a th:href="@{/register}" sec:authorize="hasRole('ROLE_ADMIN')" role="button" class="btn btn-outline-secondary">Registar usuario nuevo</a>
+              <a th:href="@{/userLst}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')" role="button" class="btn btn-outline-secondary">Ver lista de usuarios</a>
     </div>
     <br />
     </div>
