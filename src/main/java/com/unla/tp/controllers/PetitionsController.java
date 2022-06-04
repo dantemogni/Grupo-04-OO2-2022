@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.tp.controllers.helpers.ViewRouteHelper;
+import com.unla.tp.models.Petition;
 
-import net.bytebuddy.asm.Advice.Return;
 
 @Controller
 public class PetitionsController {
@@ -29,7 +29,7 @@ public class PetitionsController {
     public ModelAndView newPetition(){
 
         ModelAndView mV = new ModelAndView(ViewRouteHelper.NEW_PETITION);
-
+        mV.addObject("petition", new Petition());
         return mV;
     }
     

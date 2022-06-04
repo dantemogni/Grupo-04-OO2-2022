@@ -1,4 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
+<head th:replace="fragments/head :: head(title='Sign Up', css='/css/registration.css')"></head>
+
+
+
+<body>
+    <main>
+        <div class="container">
+            <div class="row vh-100 align-items-center justify-content-center">
+                <div class="sign-up-form col col-12 col-md-5">
+                    <h3 class="form-signin-heading">Pedido</h3>
+                    <form autocomplete="off" action="register" th:action="@{/petitionNote}" th:object="${petition}" method="post" class="form-horizontal" role="form">
+                        <div class="form-floating mb-3">
+                            <input type="date" id="fecha" name="fecha" aria-label="Date" class="form-control" placeholder="Fecha" th:field="*{fecha}" th:value="${petition.fecha}">
+                            <label for="floatingInput">Fecha</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
 </html>
