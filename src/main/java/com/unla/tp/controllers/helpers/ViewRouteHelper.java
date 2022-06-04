@@ -15,4 +15,8 @@ public class ViewRouteHelper {
     public static final String USER_REGISTRATION = "user/register";
     public static final String USERS_LST = "user/usersLst";
     public static final String USER_EDIT = "user/editUser";
+
+    //PETITIONS
+    public static final String PETITIONS_LST = "managementPetitions/manOrderNotes";
+    public static final String NEW_PETITION = "petitionNote/petitionNote";
 }

@@ -21,8 +21,16 @@
               ></h1>
               <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
               </div>
-              <a th:href="@{/register}" sec:authorize="hasRole('ROLE_ADMIN')" role="button" class="btn btn-outline-secondary">Registar usuario nuevo</a>
-              <a th:href="@{/userLst}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')" role="button" class="btn btn-outline-secondary">Ver lista de usuarios</a>
+
+            <a th:href="@{/register}" sec:authorize="hasRole('ROLE_ADMIN')" role="button" class="btn btn-outline-secondary">Registar usuario nuevo</a>
+            <a th:href="@{/userLst}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')" role="button" class="btn btn-outline-secondary">Ver lista de usuarios</a>
+
+            <!-- VER NOTA DE PEDIDO PARA GESTIONAR VALIDACIONES -->
+            <a th:href="@{/manOrderNotes}" sec:authorize="hasRole('ROLE_ADMIN')" role="button" class="btn btn-outline-secondary">Notas de Pedido</a>
+
+            <!-- HACER NOTA DE PEDIDOS AL ADMINISTRADOR-->
+
+            <a th:href="@{/petitionNote}" sec:authorize="hasRole('ROLE_PROFESOR')" role="button" class="btn btn-outline-secondary">Nuevo Pedido</a>
     </div>
     <br />
     </div>
