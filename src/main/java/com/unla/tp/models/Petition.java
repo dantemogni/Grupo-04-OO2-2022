@@ -20,5 +20,9 @@ public class Petition {
     private int cantEstudiantes;
     private int idMateria;
     private String observaciones;
+    private int idCarrera;
+    //EL ESTADO PUEDE SER EN PROCESO-ACEPTADO-RECHAZADO
+    @Builder.Default
+    private String estado = "enProceso";
     
 }
