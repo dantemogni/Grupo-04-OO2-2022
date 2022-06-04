@@ -16,7 +16,8 @@
                     <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
                     <div>
                         <h1>Listado de usuarios</h1>
-                      </div>
+                        <a sec:authorize="hasRole('ROLE_AUDITOR')" th:href="@{/users/export/pdf}" role="button" class="btn btn-outline-danger"><i class="fas fa-file-download"></i> Exportar PDF</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <table

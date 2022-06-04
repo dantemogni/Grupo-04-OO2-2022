@@ -1,5 +1,12 @@
 package com.unla.tp.controllers;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lowagie.text.DocumentException;
 import com.unla.tp.controllers.helpers.ViewRouteHelper;
 import com.unla.tp.entities.User;
 import com.unla.tp.models.UserRequest;
 import com.unla.tp.models.validator.UserRequestValidator;
 import com.unla.tp.services.UserService;
+import com.unla.tp.utils.UserPDFExporter;
 
 @Controller
 public class UserController {
@@ -125,6 +134,23 @@ public class UserController {
         modelAndView.addObject("successMessage", "Usuario actualizado con éxito");
 
         return modelAndView;
+    }
+
+    @GetMapping("/users/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<User> listUsers = userService.getAll();
+
+        UserPDFExporter exporter = new UserPDFExporter(listUsers);
+        exporter.export(response);
+
     }
 
 }
