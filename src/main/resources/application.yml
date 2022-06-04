@@ -5,7 +5,7 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  ## CON ESTO, SPRING CREA LAS TABLAS SEGUN NUESTRAS ENTITIES. NO USA EL `schema.sql` ni `data.sql`
+  # # CON ESTO, SPRING CREA LAS TABLAS SEGUN NUESTRAS ENTITIES. NO USA EL `schema.sql` ni `data.sql`
   # jpa:
   #   show-sql: true
   #   hibernate:
