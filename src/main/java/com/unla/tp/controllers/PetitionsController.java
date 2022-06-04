@@ -3,6 +3,7 @@ package com.unla.tp.controllers;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.tp.controllers.helpers.ViewRouteHelper;
@@ -32,5 +33,7 @@ public class PetitionsController {
         mV.addObject("petition", new Petition());
         return mV;
     }
+
+    // @PostMapping("/petitionNote")
     
 }
