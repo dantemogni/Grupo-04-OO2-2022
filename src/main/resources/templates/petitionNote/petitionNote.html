@@ -60,9 +60,17 @@
                             <label for="Carrera">Carrera</label>
                         </div>
 
+                        <div class="form-floating mb-3">
+                            <textarea rows="5" cols="40" name="observaciones" th:field="*{observaciones}" th:value="${petition.observaciones}">
+                                Observaciones
+                            </textarea>
+                        </div>
+
                     </form>
                 </div>
             </div>
+            <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+
         </div>
     </main>
 </body>
