@@ -61,8 +61,9 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <textarea rows="5" cols="40" name="observaciones" th:field="*{observaciones}" th:value="${petition.observaciones}">
-                                Observaciones
+                            Observaciones: <br>
+                            <textarea rows="5" cols="40" name="observaciones" spellcheck="false" th:field="*{observaciones}" th:value="${petition.observaciones}">
+                                <!-- ÁREA PARA OBERSVARCIONES. SE PUEDE USAR PARA PEDIR AULAS CON PROYECTOR. -->
                             </textarea>
                         </div>
 
