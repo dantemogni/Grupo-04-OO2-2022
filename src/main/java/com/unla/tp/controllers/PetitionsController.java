@@ -34,6 +34,14 @@ public class PetitionsController {
         return mV;
     }
 
+    //TODO: AGREGAR NOTAS DE PEDIDO A BD
+
     // @PostMapping("/petitionNote")
+    // public ModelAndView newNotePetition(){
+
+    //     ModelAndView mV = new ModelAndView(ViewRouteHelper.NEW_PETITION);
+
+    //     return mV;
+    // }
     
 }

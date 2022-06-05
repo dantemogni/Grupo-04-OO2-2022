@@ -67,13 +67,22 @@
                             </textarea>
                         </div>
 
+                        <div>
+                            <!-- TODO: AGREGAR PETICION A BD -->
+                            <!-- <a th:href="@{/index}" class="btn btn-primary">Volver</a> -->
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+
+                        </div>
                     </form>
+
+
                 </div>
             </div>
-            <a th:href="@{/index}" class="btn btn-primary">Volver</a>
 
         </div>
     </main>
+    <footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 
 </html>
