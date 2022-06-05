@@ -1,6 +1,7 @@
 package com.unla.tp.services.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.unla.tp.entities.PetitionNote;
 import com.unla.tp.models.Petition;
@@ -9,6 +10,7 @@ import com.unla.tp.respositories.MateriaRepository;
 import com.unla.tp.respositories.PetitionRepository;
 import com.unla.tp.services.PetitionService;
 
+@Service
 public class PetitionServiceImpl implements PetitionService{
 
     @Autowired

@@ -1,18 +1,24 @@
 package com.unla.tp.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.tp.controllers.helpers.ViewRouteHelper;
 import com.unla.tp.models.Petition;
+import com.unla.tp.services.PetitionService;
 
 
 @Controller
 public class PetitionsController {
 
+    @Autowired
+    private PetitionService petitionService;
 
     //REDIRIGE A LAS PETICIONES HECHAS
     @Secured("ROLE_ADMIN")
@@ -34,14 +40,15 @@ public class PetitionsController {
         return mV;
     }
 
-    //TODO: AGREGAR NOTAS DE PEDIDO A BD
+    
 
-    // @PostMapping("/petitionNote")
-    // public ModelAndView newNotePetition(){
+    @PostMapping("/petitionNote")
+    public ModelAndView newNotePetition(@ModelAttribute("petition") Petition petitionModel){
 
-    //     ModelAndView mV = new ModelAndView(ViewRouteHelper.NEW_PETITION);
+    ModelAndView mV = new ModelAndView(ViewRouteHelper.NEW_PETITION);
 
-    //     return mV;
-    // }
+    petitionService.insert(petitionModel);
+    return mV;
+    }
     
 }

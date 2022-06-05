@@ -14,9 +14,10 @@ spring:
   #     dialect: org.hibernate.dialect.MySQL5Dialect
 
 
-  # sql:
-  #   init:
-  #     mode: always
+## CREA ENTIDADES SEGUN SCHEMA-SQL
+  sql:
+    init:
+      mode: always
       
   thymeleaf:
     cache: false
