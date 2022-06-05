@@ -15,9 +15,9 @@ spring:
 
 
 ## CREA ENTIDADES SEGUN SCHEMA-SQL
-  sql:
-    init:
-      mode: always
+  # sql:
+  #   init:
+  #     mode: always
       
   thymeleaf:
     cache: false
