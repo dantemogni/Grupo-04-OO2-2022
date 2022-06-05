@@ -5,10 +5,10 @@ import java.io.Serializable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.unla.tp.entities.petitionNote;
+import com.unla.tp.entities.PetitionNote;
 
 @Repository
-public interface petitionRepository extends JpaRepository <petitionNote, Serializable> {
+public interface PetitionRepository extends JpaRepository <PetitionNote, Serializable> {
     
     
 }

@@ -15,12 +15,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class petitionNote {
+public class PetitionNote {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +45,6 @@ public class petitionNote {
 
     @ManyToOne
     @JoinColumn(name = "idCarrera")
-    private Carrera carrera;
+    private Carrera carrera;   
 
 }
