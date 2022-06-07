@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 import com.unla.tp.entities.PetitionNote;
 
 @Repository
-public interface PetitionRepository extends JpaRepository <PetitionNote, Serializable> {
-    
-    
+public interface PetitionRepository extends JpaRepository<PetitionNote, Serializable> {
 }

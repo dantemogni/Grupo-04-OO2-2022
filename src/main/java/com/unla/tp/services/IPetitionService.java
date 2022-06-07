@@ -1,9 +1,11 @@
 package com.unla.tp.services;
 
+import com.unla.tp.entities.PetitionNote;
 import com.unla.tp.models.Petition;
 
-public interface IOrderNoteService {
-    public Petition create(Petition petition);
+public interface IPetitionService {
+
+    public PetitionNote insert(Petition petition);
 
     public void aceptar(Petition petition);
 
