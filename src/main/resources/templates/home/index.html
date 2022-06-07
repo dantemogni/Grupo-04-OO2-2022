@@ -46,7 +46,7 @@
 
             <!-- VER NOTA DE PEDIDO PARA GESTIONAR VALIDACIONES -->
             <a
-              th:href="@{/manOrderNotes}"
+              th:href="@{/petitions/made}"
               sec:authorize="hasRole('ROLE_ADMIN')"
               role="button"
               class="btn btn-outline-secondary"
@@ -56,7 +56,7 @@
             <!-- HACER NOTA DE PEDIDOS AL ADMINISTRADOR-->
 
             <a
-              th:href="@{/petitionNote}"
+              th:href="@{/petitions/create}"
               sec:authorize="hasRole('ROLE_PROFESOR')"
               role="button"
               class="btn btn-outline-secondary"
@@ -86,7 +86,7 @@
           sec:authorize="hasRole('ROLE_ADMIN')"
           role="button"
           class="btn btn-outline-secondary"
-          >Consultar Espacios</a
+          >Consultar Disponibilidad general</a
         >
       </div>
         </div>

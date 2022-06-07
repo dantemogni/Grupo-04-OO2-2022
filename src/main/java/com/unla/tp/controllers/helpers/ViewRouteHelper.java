@@ -19,6 +19,7 @@ public class ViewRouteHelper {
     // PETITIONS
     public static final String PETITIONS_LST = "managementPetitions/manOrderNotes";
     public static final String NEW_PETITION = "petitionNote/petitionNote";
+    public static final String PETITION_DETAILS = "petitionNote/details";
 
     // BUILDING
     public static final String BUILDING_LST = "buildings/list";

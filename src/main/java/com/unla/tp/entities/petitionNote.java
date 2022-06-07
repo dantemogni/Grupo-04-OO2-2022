@@ -13,11 +13,12 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.unla.tp.utils.Const;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @AllArgsConstructor
@@ -26,12 +27,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "nota_pedido")
 public class PetitionNote {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @DateTimeFormat (pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column
     private LocalDate fecha;
 
@@ -50,6 +51,10 @@ public class PetitionNote {
 
     @ManyToOne
     @JoinColumn(name = "idCarrera")
-    private Carrera carrera;   
+    private Carrera carrera;
+
+    @Builder.Default
+    @Column
+    private String estado = Const.STATUS_PROCESSING;
 
 }

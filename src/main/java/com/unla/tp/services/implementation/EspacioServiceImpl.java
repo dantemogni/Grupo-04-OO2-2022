@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.unla.tp.entities.Aula;
 import com.unla.tp.entities.Espacio;
+import com.unla.tp.entities.Laboratorio;
+import com.unla.tp.entities.Tradicional;
 import com.unla.tp.respositories.AulaRepository;
 import com.unla.tp.respositories.EspacioRepository;
 import com.unla.tp.services.IEspacioService;

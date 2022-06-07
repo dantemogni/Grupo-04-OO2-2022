@@ -7,7 +7,9 @@ public interface IPetitionService {
 
     public PetitionNote insert(Petition petition);
 
-    public void aceptar(Petition petition);
+    public void aceptar(Petition petition, Espacio espacio);
 
-    public void rechazar(Petition petition);
+    public void rechazar(PetitionNote petition);
+
+    public PetitionNote getById(int id);
 }
