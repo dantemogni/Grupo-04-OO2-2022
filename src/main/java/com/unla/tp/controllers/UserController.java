@@ -25,13 +25,13 @@ import com.unla.tp.controllers.helpers.ViewRouteHelper;
 import com.unla.tp.entities.User;
 import com.unla.tp.models.UserRequest;
 import com.unla.tp.models.validator.UserRequestValidator;
-import com.unla.tp.services.UserService;
+import com.unla.tp.services.IUserService;
 import com.unla.tp.utils.UserPDFExporter;
 
 @Controller
 public class UserController {
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;

@@ -8,7 +8,7 @@ import com.unla.tp.entities.User;
 import com.unla.tp.models.UserRequest;
 import com.unla.tp.respositories.RoleRepository;
 import com.unla.tp.respositories.UserRepository;
-import com.unla.tp.services.UserService;
+import com.unla.tp.services.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
 

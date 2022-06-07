@@ -3,7 +3,7 @@ package com.unla.tp.models.validator;
 import java.util.regex.Pattern;
 
 import com.unla.tp.models.UserRequest;
-import com.unla.tp.services.UserService;
+import com.unla.tp.services.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,10 +13,10 @@ import org.springframework.validation.Validator;
 
 @Component
 public class UserRequestValidator implements Validator {
-    private final UserService userService;
+    private final IUserService userService;
 
     @Autowired
-    public UserRequestValidator(UserService userService) {
+    public UserRequestValidator(IUserService userService) {
         this.userService = userService;
     }
 
