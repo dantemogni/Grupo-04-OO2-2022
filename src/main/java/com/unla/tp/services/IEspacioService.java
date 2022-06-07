@@ -16,7 +16,7 @@ public interface IEspacioService {
 
     public void eliminar(Espacio espacio);
 
-    public List<Espacio> matchedSpaces(LocalDate fecha, char turno);
+    public List<Espacio> matchedSpaces(LocalDate fecha, char turno, int cantAlumnos);
 
     public void agregarEspacioMes(int mes, int anio, char turno, Aula aula) throws Exception;
 

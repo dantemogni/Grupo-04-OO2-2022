@@ -54,19 +54,29 @@ public class EspacioServiceImpl implements IEspacioService {
         espacioRepository.save(space);
     }
 
-    // WIP
+    // Le muestra al administrador todas aquellas aulas que pueden usarse
     @Override
-    public List<Espacio> matchedSpaces(LocalDate fecha, char turno) {
-        List<Espacio> allMatchedSpaces = new ArrayList<>();
+    public List<Espacio> matchedSpaces(LocalDate fecha, char turno, int cantAlumnos) {
         List<Espacio> spaces = espacioRepository.findAll();
+        List<Espacio> matchedSpaces = new ArrayList<>();
+        int bancos = 0; // Sillas disponibles
 
         for (Espacio s : spaces) {
-            if (s.isLibre()) {
-                allMatchedSpaces.add(s);
+            if (s.getAula() instanceof Tradicional) {
+                Tradicional trad = (Tradicional) s.getAula();
+                bancos = trad.getCantBancos();
+            } else {
+                Laboratorio lab = (Laboratorio) s.getAula();
+                bancos = lab.getCantSillas();
+            }
+
+            // Si está disponible, el turno pedido coincide y hay sufientes bancos...
+            if (s.isLibre() && s.getTurno() == turno && bancos >= cantAlumnos) {
+                matchedSpaces.add(s);
             }
         }
 
-        return allMatchedSpaces;
+        return matchedSpaces;
     }
 
     @Override

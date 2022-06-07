@@ -1,5 +1,6 @@
 package com.unla.tp.services;
 
+import com.unla.tp.entities.Espacio;
 import com.unla.tp.entities.PetitionNote;
 import com.unla.tp.models.Petition;
 
