@@ -123,7 +123,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
         user.setUsername(userRequest.getUsername());
         // user.setRole(roleRepository.getById(userRequest.getRoleId()));
-        // user.setEnabled(true);
+        //user.setEnabled(true);
 
         return userRepository.save(user);
     }

@@ -16,6 +16,9 @@ public class PetitionsController {
     @Autowired
     private IOrderNoteService orderNoteService;
 
+    // @Autowired
+    // private PetitionService petitionService;
+
     // REDIRIGE A LAS PETICIONES HECHAS
     @Secured("ROLE_ADMIN")
     @GetMapping("/manOrderNotes")
@@ -54,4 +57,15 @@ public class PetitionsController {
 
         return mV;
     }
+
+    // @PostMapping("/petitionNote")
+    // public ModelAndView newNotePetition(@ModelAttribute("petition") Petition
+    // petitionModel){
+
+    // ModelAndView mV = new ModelAndView(ViewRouteHelper.NEW_PETITION);
+
+    // petitionService.insert(petitionModel);
+    // return mV;
+    // }
+
 }

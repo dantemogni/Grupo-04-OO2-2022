@@ -12,11 +12,11 @@
                 <div class="sign-up-form col col-12 col-md-5">
                     <h3 class="form-signin-heading">Pedido</h3>
                     <form autocomplete="off" action="register" th:action="@{/petitionNote}" th:object="${petition}" method="post" class="form-horizontal" role="form">
-                        <div class="form-floating mb-3">
-                            <!-- th:field="*{campo}" nos permite enlazar una propiedad del objeto al que este vinculado el formulario a un elemento de este formulario -->
-                            <input type="date" id="fecha" name="fecha" aria-label="Date" class="form-control" placeholder="Fecha" th:field="*{fecha}" th:value="${petition.fecha}">
-                            <label for="floatingInput">Fecha</label>
-                        </div>
+                        <!-- <div class="form-floating mb-3"> -->
+                        <!-- th:field="*{campo}" nos permite enlazar una propiedad del objeto al que este vinculado el formulario a un elemento de este formulario -->
+                        <!-- <input type="date" id="fecha" name="fecha" aria-label="Date" class="form-control" placeholder="Fecha" th:field="*{fecha}" th:value="${petition.fecha}">
+                            <label for="date">Fecha</label>
+                        </div> -->
                         <div class="form-floating mb-3 col-12 mb-3">
                             <select id="turno" th:field="*{turno}" class="form-select" aria-label="Turno">
                                 <option th:value=" 'm' ">Mañana</option>
@@ -67,13 +67,22 @@
                             </textarea>
                         </div>
 
+                        <div>
+                            <!-- TODO: AGREGAR PETICION A BD -->
+                            <!-- <a th:href="@{/index}" class="btn btn-primary">Volver</a> -->
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+
+                        </div>
                     </form>
+
+
                 </div>
             </div>
-            <a th:href="@{/index}" class="btn btn-primary">Volver</a>
 
         </div>
     </main>
+    <footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
 
 </html>
