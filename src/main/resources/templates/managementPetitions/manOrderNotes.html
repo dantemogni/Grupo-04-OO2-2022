@@ -1,4 +1,143 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
+<head th:replace="fragments/head :: head(title='Notas de pedido ', css='/css/registration.css')">
+    </head>
+
+<body>
+    <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                    <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+                    <div>
+                        <h1>Bandeja de entrada de notas de pedido</h1>
+                    </div>
+                </div>
+                <div class="panel-body">
+                </br>
+                    <h3>Notas de pedido sin responder</h3>
+                    <table
+                        class="table table-hover table-responsive-md"
+                        th:unless="${#lists.isEmpty(petitions)}"
+                        >
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Turno</th>
+                                <th scope="col">Cant. de estudiantes</th>
+                                <th scope="col">Estado</th>
+                                <th class="w-auto" scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr 
+                                th:each="petition: ${petitions}"
+                                th:if="${petition.getEstado} == 'enProceso'"
+                                >
+                            <td
+                                th:text="${petition.getFecha}"
+                            ></td>
+                            <td
+                                th:text="${petition.getTurno}"
+                            ></td>
+                            <td
+                                th:text="${petition.getCantEstudiantes}"
+                            ></td>
+                            <td>🕑 Pendiente</td>
+                            <td>
+                            <a
+                                role="button"
+                                class="btn btn-primary btn-sm"
+                                th:href="@{/petitions/detail/{id}(id=${petition.getId})}"
+                                >
+                                <i class="fas fa-info-circle"></i> Ver detalle
+                            </a>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </br>
+                    </br>
+                    <h3>Notas de pedido aceptadas</h3>
+                    <table
+                        class="table table-hover table-responsive-md"
+                        th:unless="${#lists.isEmpty(petitions)}"
+                    >
+                    <thead>
+                        <tr>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Turno</th>
+                            <th scope="col">Cant. de estudiantes</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            th:each="petition: ${petitions}" 
+                            th:if="${petition.getEstado} == 'aceptada'"
+                            >
+                        <td
+                            th:text="${petition.getFecha}"
+                        ></td>
+                        <td
+                            th:text="${petition.getTurno}"
+                        ></td>
+                        <td
+                            th:text="${petition.getCantEstudiantes}"
+                        ></td>
+                        <td>✅ Aceptada</td>
+                        <td>
+                        </tr>
+                    </tbody>
+                </table>
+                </br>
+                </br>
+                <h3>Notas de pedido rechazadas</h3>
+                <table
+                    class="table table-hover table-responsive-md"
+                    th:unless="${#lists.isEmpty(petitions)}"
+                >
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Turno</th>
+                        <th scope="col">Cant. de estudiantes</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr 
+                        th:each="petition: ${petitions}" 
+                        th:if="${petition.getEstado} == 'rechazado'"
+                        >
+                    <td
+                        th:text="${petition.getFecha}"
+                    ></td>
+                    <td
+                        th:text="${petition.getTurno}"
+                    ></td>
+                    <td
+                        th:text="${petition.getCantEstudiantes}"
+                    ></td>
+                    <td>🚫 Rechazada</td>
+                    <td>
+                    </tr>
+                </tbody>
+            </table>
+                </div>
+            </div>
+        </div>
+        <button onclick="history.back()" class="btn btn-primary">Volver</button>
+    </div>
+</br>
+    <footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+
 </html>

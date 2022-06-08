@@ -13,19 +13,23 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                    <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
                     <div>
                         <h1>Detalle Nota de Pedido</h1>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="orderNote-info">
-                        Fecha: <span th:text="${petition.getFecha}"></span>
-                        Turno: <span th:text="${petition.getTurno}"></span>
-                        Cantidad de estudiantes: <span th:text="${petition.getCantEstudiantes}"></span>
-                        <!-- Materia: <span th:text="${petition.getMateria.getMateria}"></span>
-                        Carrera: <span th:text="${petition.getCarrera.getCarrera}"></span> -->
-                        Observaciones: <span th:text="${petition.getObservaciones}"></span>
+                    <div class="alert alert-info" role="alert">
+                        <ul>
+                            <li>📆 <strong>Fecha: </strong><span th:text="${petition.getFecha}"></span></li>
+                            <li>⏰ <strong>Turno: </strong><span th:text="${petition.getTurno}"></span></li>
+                            <li>👨‍🎓 <strong>Cantidad de estudiantes: </strong><span th:text="${petition.getCantEstudiantes}"></span></li>
+                            <li>📚 <strong>Materia: </strong><span th:text="${petition.getMateria.getMateria}"></span></li>
+                            <li>🎒 <strong>Carrera: </strong><span th:text="${petition.getCarrera.getCarrera}"></span></li>
+                            <li>❗ <strong>Observaciones: </strong><span th:text="${petition.getObservaciones}"></span></li>
+                        </ul>
                     </div>
+                    <h3>Aulas disponibles que se ajustan al pedido:</h3>
                     <table
                         class="table table-hover table-responsive-md"
                         th:unless="${#lists.isEmpty(matchedSpaces)}"
@@ -60,12 +64,14 @@
                                         id="detail"
                                         class="btn btn-primary btn-sm"
                                         data-bs-toggle="modal"
+                                        th:data-spaceid="${matchedSpace.getId}"
+                                        th:data-petitionid="${petition.getId}"
                                         th:data-bancos="${matchedSpace.getAula.getCantBancos}"
                                         th:data-pizarron="${matchedSpace.getAula.getPizarron}"
                                         th:data-proyector="${matchedSpace.getAula.isTieneProyector}"
-                                        data-bs-target="#traditionalDetailsModal"
+                                        data-bs-target="#traditionalPetitionDetailsModal"
                                     >
-                                    <i class="fas fa-info-circle"></i> Ver detalle y cerrar pedido
+                                        <i class="fas fa-info-circle"></i> Ver detalle y cerrar pedido
                                     </button>
                                     <button
                                         th:if="${matchedSpace.getAula instanceof T(com.unla.tp.entities.Laboratorio)}"
@@ -73,11 +79,13 @@
                                         id="detail"
                                         class="btn btn-primary btn-sm"
                                         data-bs-toggle="modal"
+                                        th:data-spaceid="${matchedSpace.getId}"
+                                        th:data-petitionid="${petition.getId}"
                                         th:data-pc="${matchedSpace.getAula.getCantPc}"
                                         th:data-sillas="${matchedSpace.getAula.getCantSillas}"
-                                        data-bs-target="#labDetailsModal"
+                                        data-bs-target="#labDetailsPetitionModal"
                                     >
-                                    <i class="fas fa-info-circle"></i> Ver detalle y cerrar pedido
+                                        <i class="fas fa-info-circle"></i> Ver detalle y cerrar pedido
                                     </button>
                                 </td>
                             </tr>
@@ -88,14 +96,18 @@
                         role="button"
                         class="btn btn-outline-danger"
                         >Rechazar Pedido</a>
+                </br>
                 </div>
             </div>
         </div>
-    <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+    </br>
+
+    <button onclick="history.back()" class="btn btn-primary">Volver</button>
     </div>
 </br>
-    <!-- Delete Modal -->
-    <div th:replace="fragments/modals :: details"></div>
+    <!-- Modals -->
+    <div th:replace="fragments/modals :: details-traditional-note"></div>
+    <div th:replace="fragments/modals :: details-lab-note"></div>
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
 </body>
 
