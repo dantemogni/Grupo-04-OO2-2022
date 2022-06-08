@@ -18,7 +18,7 @@
                         <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
                       </a>
                     <div>
-                        <h1>Listado general de aulas</h1>
+                        <h1>Listado de aulas para el edificio: <span th:text="${nombreEdificio}"></span></h1>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -46,27 +46,6 @@
                                 th:text="${classroom instanceof T(com.unla.tp.entities.Laboratorio)} ? '🖥️ Laboratorio' : '📚 Tradicional'"
                             ></td>
                             <td>
-                                <a
-                                sec:authorize="hasRole('ROLE_ADMIN')"
-                                role="button"
-                                class="btn btn-outline-warning btn-sm"
-                                th:href="@{/classroom/modify/{id}(id=${classroom.getId})}"
-                                >
-                                <i class="far fa-edit"></i>
-                                </a>
-                                <button
-                                    sec:authorize="hasRole('ROLE_ADMIN')"
-                                    type="button"
-                                    id="delete"
-                                    class="btn btn-outline-danger btn-sm"
-                                    data-bs-toggle="modal"
-                                    th:data-content="'N°'+${classroom.getNumero}+' '+${classroom.getEdificio.getEdificio}"
-                                    th:data-id="${classroom.getId}"
-                                    data-type="classroom"
-                                    data-bs-target="#deleteModal"
-                                >
-                                <i class="far fa-trash-alt"></i>
-                                </button>
                                 <button
                                 th:if="${classroom instanceof T(com.unla.tp.entities.Tradicional)}"
                                 type="button"
@@ -99,12 +78,13 @@
                 </div>
             </div>
         </div>
-    <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+        <button onclick="history.back()" class="btn btn-primary">Volver</button>
+
+    <a th:href="@{/index}" class="btn btn-outline-secondary">Inicio</a>
     </div>
 </br>
     <!-- Delete Modal -->
     <div th:replace="fragments/modals :: details"></div>
-    <div th:replace="fragments/modals :: delete"></div>
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
 
 </body>

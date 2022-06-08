@@ -1,84 +1,185 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head
+    th:replace="fragments/head :: head(title='Sign Up', css='/css/registration.css')"
+  >
+  </head>
 
-<head th:replace="fragments/head :: head(title='Sign Up', css='/css/registration.css')">
-</head>
-
-<body>
+  <body>
     <main>
-        <div class="container">
-            <nav class="nav justify-content-end">
-                <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
+      <div class="container">
+        <nav class="nav justify-content-end">
+          <a class="nav-link" th:href="@{/logout}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+        </nav>
+        <div class="row vh-100 align-items-center justify-content-center">
+          <div class="sign-up-form col col-12 col-md-5">
+            <h3 class="form-signin-heading">Registro</h3>
+            <form
+              autocomplete="off"
+              action="register"
+              th:action="@{/register}"
+              th:object="${userSignUpRequest}"
+              method="post"
+              class="form-horizontal"
+              role="form"
             >
-          </nav>
-            <div class="row vh-100 align-items-center justify-content-center">
-                <div class="sign-up-form col col-12 col-md-5">
-                    <h3 class="form-signin-heading">Registro</h3>
-                    <form autocomplete="off" action="register" th:action="@{/register}" th:object="${userSignUpRequest}" method="post" class="form-horizontal" role="form">
-                        <div class="form-floating mb-3">
-                            <input type="text" id="nombre" name="nombre" aria-label="Name" class="form-control" placeholder="Name" th:field="*{nombre}" th:value="${userSignUpRequest.nombre}" />
-                            <label for="floatingInput">Nombre</label>
-                            <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="validation-message text-danger"></p>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" id="apellido" name="apellido" aria-label="Apellido" class="form-control" placeholder="Apellido" th:field="*{apellido}" th:value="${userSignUpRequest.apellido}" />
-                            <label for="floatingInput">Apellido</label>
-                            <p th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="validation-message text-danger"></p>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" id="email" name="email" aria-label="Email" class="form-control" placeholder="Email" th:field="*{email}" th:value="${userSignUpRequest.email}" />
-                            <label for="floatingInput">Email</label>
-                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message text-danger"></p>
-                        </div>
-                        <div class="row g-3">
-                            <div class="form-floating col-sm-3 mb-3">
-                                <select id="tipoDoc" th:field="*{tipoDocumento}" class="form-select" aria-label="Tipo">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  aria-label="Name"
+                  class="form-control"
+                  placeholder="Name"
+                  th:field="*{nombre}"
+                  th:value="${userSignUpRequest.nombre}"
+                />
+                <label for="floatingInput">Nombre</label>
+                <p
+                  th:if="${#fields.hasErrors('nombre')}"
+                  th:errors="*{nombre}"
+                  class="validation-message text-danger"
+                ></p>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="apellido"
+                  name="apellido"
+                  aria-label="Apellido"
+                  class="form-control"
+                  placeholder="Apellido"
+                  th:field="*{apellido}"
+                  th:value="${userSignUpRequest.apellido}"
+                />
+                <label for="floatingInput">Apellido</label>
+                <p
+                  th:if="${#fields.hasErrors('apellido')}"
+                  th:errors="*{apellido}"
+                  class="validation-message text-danger"
+                ></p>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  aria-label="Email"
+                  class="form-control"
+                  placeholder="Email"
+                  th:field="*{email}"
+                  th:value="${userSignUpRequest.email}"
+                />
+                <label for="floatingInput">Email</label>
+                <p
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"
+                  class="validation-message text-danger"
+                ></p>
+              </div>
+              <div class="row g-3">
+                <div class="form-floating col-sm-3 mb-3">
+                  <select
+                    id="tipoDoc"
+                    th:field="*{tipoDocumento}"
+                    class="form-select"
+                    aria-label="Tipo"
+                  >
                     <option selected th:value="'dni'">DNI</option>
                     <option th:value="'pasaporte'">Pasaporte</option>
                     <option th:value="'cuit'">CUIT</option>
                   </select>
-                                <label for="tipoDoc">Tipo</label>
-                            </div>
-                            <div class="form-floating col-sm-9 mb-3">
-                                <input type="number" id="nroDocumento" name="nroDocumento" aria-label="Numero Documento" class="form-control" placeholder="nroDocumento" th:field="*{nroDocumento}" th:value="${userSignUpRequest.nroDocumento}" />
-                                <label for="floatingInput">Número</label>
-                                <p th:if="${#fields.hasErrors('nroDocumento')}" th:errors="*{nroDocumento}" class="validation-message text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <!-- Importante: El valor de cada `option` corresponse con el ID en la DB de cada rol -->
-                            <select id="rol" th:field="*{roleId}" class="form-select" aria-label="Rol">
+                  <label for="tipoDoc">Tipo</label>
+                </div>
+                <div class="form-floating col-sm-9 mb-3">
+                  <input
+                    type="number"
+                    id="nroDocumento"
+                    name="nroDocumento"
+                    aria-label="Numero Documento"
+                    class="form-control"
+                    placeholder="nroDocumento"
+                    th:field="*{nroDocumento}"
+                    th:value="${userSignUpRequest.nroDocumento}"
+                  />
+                  <label for="floatingInput">Número</label>
+                  <p
+                    th:if="${#fields.hasErrors('nroDocumento')}"
+                    th:errors="*{nroDocumento}"
+                    class="validation-message text-danger"
+                  ></p>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <!-- Importante: El valor de cada `option` corresponse con el ID en la DB de cada rol -->
+                <select
+                  id="rol"
+                  th:field="*{roleId}"
+                  class="form-select"
+                  aria-label="Rol"
+                >
                   <option th:value="1">Administrador/a</option>
                   <option selected th:value="2">Auditor/a</option>
                   <option th:value="3">Asistente</option>
                   <option th:value="4">Alumno/a</option>
                   <option th:value="5">Profesor/a</option>
                 </select>
-                            <label for="rol">Rol</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" id="username" name="username" aria-label="Username" class="form-control" placeholder="Username" th:field="*{username}" th:value="${userSignUpRequest.username}" />
-                            <label for="floatingInput">Username</label>
-                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="validation-message text-danger"></p>
-                        </div>
+                <label for="rol">Rol</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  aria-label="Username"
+                  class="form-control"
+                  placeholder="Username"
+                  th:field="*{username}"
+                  th:value="${userSignUpRequest.username}"
+                />
+                <label for="floatingInput">Username</label>
+                <p
+                  th:if="${#fields.hasErrors('username')}"
+                  th:errors="*{username}"
+                  class="validation-message text-danger"
+                ></p>
+              </div>
 
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" th:field="*{password}" th:value="${userSignUpRequest.password}" />
-                            <label for="floatingPassword">Contraseña</label>
-                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message text-danger"></p>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Registrar</button>
-                        </div>
-                        <br />
-                        <div th:if="${successMessage}" class="alert alert-success" th:utext="${successMessage}" role="alert"></div>
-                    </form>
-                    <a th:href="@{/index}">Inicio</a>
-                </div>
-            </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  th:field="*{password}"
+                  th:value="${userSignUpRequest.password}"
+                />
+                <label for="floatingPassword">Contraseña</label>
+                <p
+                  th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}"
+                  class="validation-message text-danger"
+                ></p>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+              </div>
+              <br />
+              <div
+                th:if="${successMessage}"
+                class="alert alert-success"
+                th:utext="${successMessage}"
+                role="alert"
+              ></div>
+            </form>
+            <a th:href="@{/index}">Inicio</a>
+          </div>
         </div>
+      </div>
     </main>
     <footer th:replace="fragments/footer :: footer"></footer>
-</body>
-
+  </body>
 </html>

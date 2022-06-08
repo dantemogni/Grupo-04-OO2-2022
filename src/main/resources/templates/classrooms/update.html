@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="en"
+>
+  <head
+    th:replace="fragments/head :: head(title='Nota de pedido', css='/css/registration.css')"
+  ></head>
+
+  <body>
+    <main>
+      <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+        <div class="row vh-100 align-items-center justify-content-center">
+          <div class="sign-up-form col col-12 col-md-5">
+            <h3 class="form-signin-heading">Modificar aula</h3>
+
+            <!-- FORM LABORATORIO -->
+            <form
+              th:if="${classroom instanceof T(com.unla.tp.models.aula.LaboratorioRequest)}"
+              autocomplete="off"
+              action="register"
+              th:action="@{/classroom/lab/update}"
+              th:object="${classroom}"
+              method="post"
+              class="form-horizontal"
+              role="form"
+            >
+            <input type="hidden" id="id" name="id" th:field="*{id}" />
+              <div class="form-floating  mb-3 col-12">
+                <input
+                  type="number"
+                  id="numero"
+                  name="numero"
+                  aria-label="numero"
+                  class="form-control"
+                  placeholder="numero"
+                  th:field="*{numero}"
+                  th:value="${classroom.numero}"
+                />
+                <label for="floatingInput">Numero</label>
+              </div>
+              <div class="form-floating  mb-3 col-12">
+                <input
+                  type="number"
+                  id="cantPc"
+                  name="cantPc"
+                  aria-label="cantPc"
+                  class="form-control"
+                  placeholder="cantPc"
+                  th:field="*{cantPc}"
+                  th:value="${classroom.cantPc}"
+                />
+                <label for="floatingInput">Cantidad de PCs</label>
+              </div>
+              <div class="form-floating  mb-3 col-12">
+                <input
+                  type="number"
+                  id="cantSillas"
+                  name="cantSillas"
+                  aria-label="cantSillas"
+                  class="form-control"
+                  placeholder="cantSillas"
+                  th:field="*{cantSillas}"
+                  th:value="${classroom.cantSillas}"
+                />
+                <label for="floatingInput">Cantidad de sillas</label>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+              </div>
+            </br>
+            <div
+            th:if="${successMessage}"
+            class="alert alert-success"
+            th:utext="${successMessage}"
+            role="alert"
+            ></div>
+        </form>
+
+        <!-- FORM TRADICIONAL -->
+
+        <form
+              th:if="${classroom instanceof T(com.unla.tp.models.aula.TradicionalRequest)}"
+              autocomplete="off"
+              action="register"
+              th:action="@{/classroom/trad/update}"
+              th:object="${classroom}"
+              method="post"
+              class="form-horizontal"
+              role="form"
+            >
+            <input type="hidden" id="id" name="id" th:field="*{id}" />
+              <div class="form-floating  mb-3 col-12">
+                <input
+                  type="number"
+                  id="numero"
+                  name="numero"
+                  aria-label="numero"
+                  class="form-control"
+                  placeholder="numero"
+                  th:field="*{numero}"
+                  th:value="${classroom.numero}"
+                />
+                <label for="floatingInput">Numero</label>
+              </div>
+              <div class="form-floating  mb-3 col-12">
+                <input
+                  type="number"
+                  id="cantBancos"
+                  name="cantBancos"
+                  aria-label="cantBancos"
+                  class="form-control"
+                  placeholder="cantBancos"
+                  th:field="*{cantBancos}"
+                  th:value="${classroom.cantBancos}"
+                />
+                <label for="floatingInput">Cantidad de bancos</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select
+                  id="pizarron"
+                  th:field="*{pizarron}"
+                  class="form-select"
+                  aria-label="Pizarron"
+                >
+                  <option th:selected="${#strings.equals(classroom.getPizarron, T(com.unla.tp.utils.Const).PIZARRON_MARCADOR)}" th:value="${T(com.unla.tp.utils.Const).PIZARRON_MARCADOR}">Marcador</option>
+                  <option th:selected="${#strings.equals(classroom.getPizarron, T(com.unla.tp.utils.Const).PIZARRON_TIZA)}" th:value="${T(com.unla.tp.utils.Const).PIZARRON_TIZA}">Tiza</option>
+                </select>
+                <label for="Pizarron">Pizarron</label>
+              </div>
+              <div class="form-check  mb-3 col-12">
+                <input class="form-check-input" type="checkbox" th:field="*{tieneProyector}" th:value="${classroom.tieneProyector}" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">Tiene proyector</label>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+              </div>
+            </br>
+            <div
+            th:if="${successMessage}"
+            class="alert alert-success"
+            th:utext="${successMessage}"
+            role="alert"
+            ></div>
+        </form>
+    </br>
+        <button onclick="history.back()" class="btn btn-outline-secondary btn-sm">Volver</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer th:replace="fragments/footer :: footer"></footer>
+  </body>
+</html>

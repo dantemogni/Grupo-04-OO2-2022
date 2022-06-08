@@ -4,7 +4,7 @@
   xmlns:th="http://www.thymeleaf.org"
   lang="en"
 >
-  <head th:replace="fragments/head :: head(title='Home', css='/css/home.css')">
+  <head th:replace="fragments/head :: head(title='Inicio ', css='/css/home.css')">
   </head>
 
   <body>
@@ -23,83 +23,91 @@
               <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
             </a>
             <div>
-            </br>
-          </br>
+              </br>
+              </br>
               <h1 th:text="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"></h1>
               <p
-                id="userHeader"
-                th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"
+                  id="userHeader"
+                  th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"
               ></p>
             </div>
+          </div>
+          <h4>Panel de control</h4>
+          <h5 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_PROFESOR')">Control notas de pedido</h5>
+          <!-- VER NOTA DE PEDIDO PARA GESTIONAR VALIDACIONES -->
+          <a
+            th:href="@{/petitions/made}"
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            role="button"
+            class="btn btn-primary"
+            ><i class="fas fa-info-circle"></i> Consultar notas de pedido</a
+          >
 
-            <h4>Panel de control</h4>
+          <!-- HACER NOTA DE PEDIDOS AL ADMINISTRADOR-->
+          <a
+            th:href="@{/petitions/create}"
+            sec:authorize="hasRole('ROLE_PROFESOR')"
+            role="button"
+            class="btn btn-outline-success"
+            >Nuevo Pedido</a>
 
-            <a
-              th:href="@{/register}"
-              sec:authorize="hasRole('ROLE_ADMIN')"
-              role="button"
-              class="btn btn-outline-secondary"
-              >Registar usuario nuevo</a
-            >
-            <a
-              th:href="@{/userLst}"
-              sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
-              role="button"
-              class="btn btn-outline-secondary"
-              >Listado de usuarios</a
-            >
+          <a
+            th:href="@{/petitions/teacher/list}"
+            sec:authorize="hasRole('ROLE_PROFESOR')"
+            role="button"
+            class="btn btn-outline-primary"
+            >Ver pedidos realizados</a>
 
-            <!-- VER NOTA DE PEDIDO PARA GESTIONAR VALIDACIONES -->
-            <a
-              th:href="@{/petitions/made}"
-              sec:authorize="hasRole('ROLE_ADMIN')"
-              role="button"
-              class="btn btn-outline-secondary"
-              >Consultar Notas de Pedido</a
-            >
-
-            <!-- HACER NOTA DE PEDIDOS AL ADMINISTRADOR-->
-
-            <a
-              th:href="@{/petitions/create}"
-              sec:authorize="hasRole('ROLE_PROFESOR')"
-              role="button"
-              class="btn btn-outline-secondary"
-              >Nuevo Pedido</a
-            >
-
-            <br />
-            <br />
+          <br />
+          <!-- control usuarios -->
+          </br>
+          <h5 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')">Control usuarios</h5>
+          <a
+            th:href="@{/register}"
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            role="button"
+            class="btn btn-outline-secondary"
+            ><i class="fas fa-user-plus"></i> Registar usuario nuevo</a
+          >
+          <a
+            th:href="@{/userLst}"
+            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
+            role="button"
+            class="btn btn-outline-secondary"
+            ><i class="fas fa-list"></i> Listado de usuarios</a
+          >
+          </br>
+          </br>
+          <h5 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')">Control infraestructura</h5>
             <a
               th:href="@{/building/list}"
               sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
               role="button"
               class="btn btn-outline-secondary"
-              >Consultar edificios</a
+              ><i class="far fa-building"></i> Consultar edificios</a
             >
             <a
               th:href="@{/classroom/list}"
               sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
               role="button"
               class="btn btn-outline-secondary"
-              >Consultar aulas</a
+              ><i class="fas fa-book"></i> Consultar aulas</a
             >
-          </div>
           <br />
-          <a
-          th:href="@{/space/list}"
-          sec:authorize="hasRole('ROLE_ADMIN')"
-          role="button"
-          class="btn btn-outline-secondary"
-          >Consultar Disponibilidad general</a
-        >
-      </div>
+          <br />
+          <h5 sec:authorize="hasRole('ROLE_ADMIN')">Control espacios</h5>
+            <a
+            th:href="@{/space/list}"
+            sec:authorize="hasRole('ROLE_ADMIN')"
+            role="button"
+            class="btn btn-outline-secondary"
+            ><i class="fas fa-info-circle"></i> Consultar disponibilidad general</a
+          >
         </div>
       </div>
     </div>
 
     <footer th:replace="fragments/footer :: footer"></footer>
-
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
   </body>
 </html>
