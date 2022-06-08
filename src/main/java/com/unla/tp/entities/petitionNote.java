@@ -46,11 +46,11 @@ public class PetitionNote {
     private String observaciones;
 
     @ManyToOne
-    @JoinColumn(name = "idMateria")
+    @JoinColumn(name = "materia.id")
     private Materia materia;
 
     @ManyToOne
-    @JoinColumn(name = "idCarrera")
+    @JoinColumn(name = "carrera.id")
     private Carrera carrera;
 
     @Builder.Default

@@ -7,7 +7,6 @@ import com.unla.tp.entities.Aula;
 import com.unla.tp.entities.Espacio;
 
 public interface IEspacioService {
-    // metodo para crear, eliminar ...
     public List<Espacio> getAll();
 
     public Espacio traer(LocalDate fecha, char turno, Aula aula);

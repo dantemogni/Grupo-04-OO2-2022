@@ -1,3 +1,5 @@
+use bd_gestion_aulas;
+
 -- DEPAPARTAMENTO--
 INSERT INTO `departamento` VALUES (1, "Desarrollo Productivo y Tecnologico");
 
@@ -14,7 +16,6 @@ INSERT INTO `usuario` (id, nombre, apellido, email, username, password, tipo_doc
 INSERT INTO `usuario` (id, nombre, apellido, email, username, password, tipo_documento, nro_documento, id_role, enabled) VALUES (3, "Profesor", "Test", "profe@unla.edu.ar", "profe", "$2a$12$QvM5mvSxdVRyoY79LRGQ1uLw7s7yprsghnkiyrHKQr3pVR1kJbSOq" , "dni", 123456789, 5, 1);
 
 -- CARRERAS--
-use bd_gestion_aulas;
 INSERT INTO `carrera` (id, carrera, id_departamento) VALUES (1,"Gestion Ambiental",1);
 INSERT INTO `carrera` (id, carrera, id_departamento) VALUES (2,"Economia Empresarial",1);
 INSERT INTO `carrera` (id, carrera, id_departamento) VALUES (3,"Economia Política",1);

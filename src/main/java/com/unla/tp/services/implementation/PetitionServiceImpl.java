@@ -1,9 +1,10 @@
 package com.unla.tp.services.implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.unla.tp.entities.Espacio;
 import com.unla.tp.entities.PetitionNote;
 import com.unla.tp.models.Petition;
 import com.unla.tp.respositories.AulaRepository;
