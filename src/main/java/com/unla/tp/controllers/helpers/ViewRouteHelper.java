@@ -17,15 +17,19 @@ public class ViewRouteHelper {
     public static final String USER_EDIT = "user/editUser";
 
     // PETITIONS
-    public static final String PETITIONS_LST = "managementPetitions/manOrderNotes";
-    public static final String NEW_PETITION = "petitionNote/petitionNote";
+    public static final String PETITIONS_LST = "petitionNote/made";
+    public static final String NEW_PETITION = "petitionNote/create";
     public static final String PETITION_DETAILS = "petitionNote/details";
+    public static final String PETITION_PROFESOR_LST = "petitionNote/profesor/list";
 
     // BUILDING
     public static final String BUILDING_LST = "buildings/list";
+    public static final String BUILDING_EDIT = "buildings/modify";
 
     // AULA
     public static final String CLASSROOM_LST = "classrooms/list";
+    public static final String CLASSROOM_LST_BLDNG = "classrooms/byBuilding";
+    public static final String CLASSROOM_EDIT = "classrooms/update";;
 
     // ESPACIO
     public static final String SPACE_LST = "spaces/list";
