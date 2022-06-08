@@ -53,6 +53,10 @@ public class PetitionNote {
     @JoinColumn(name = "carrera.id")
     private Carrera carrera;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario.id")
+    private User usuario;
+
     @Builder.Default
     @Column
     private String estado = Const.STATUS_PROCESSING;
