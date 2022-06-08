@@ -49,6 +49,21 @@
                 <tr th:each="building: ${buildings}">
                   <td th:text="${building.getEdificio}"></td>
                   <td>
+                    <a
+                      role="button"
+                      class="btn btn-primary btn-sm"
+                      th:href="@{/classroom/list/for-building/{id}(id=${building.getId})}"
+                      >
+                      <i class="fas fa-book"></i> Ver aulas
+                    </a>
+                    <a
+                      sec:authorize="hasRole('ROLE_ADMIN')"
+                      role="button"
+                      class="btn btn-outline-warning btn-sm"
+                      th:href="@{/building/modify/{id}(id=${building.getId})}"
+                      >
+                      <i class="far fa-edit"></i>
+                    </a>
                     <button
                       sec:authorize="hasRole('ROLE_ADMIN')"
                       type="button"
@@ -57,6 +72,7 @@
                       data-bs-toggle="modal"
                       th:data-content="${building.getEdificio}"
                       th:data-id="${building.getId}"
+                      data-type="building"
                       data-bs-target="#deleteModal"
                     >
                       <i class="far fa-trash-alt"></i>
@@ -68,7 +84,7 @@
           </div>
         </div>
       </div>
-      <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+      <button onclick="history.back()" class="btn btn-primary">Volver</button>
     </div>
     <!-- Delete Modal -->
     <div th:replace="fragments/modals :: delete"></div>

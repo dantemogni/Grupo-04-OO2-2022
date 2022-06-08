@@ -33,6 +33,19 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return this.getNombre();
+        String formatted = "";
+        if (this.nombre.equals("ROLE_ADMIN")) {
+            formatted = "Administrador";
+        } else if (this.nombre.equals("ROLE_AUDITOR")) {
+            formatted = "Auditor";
+        } else if (this.nombre.equals("ROLE_PROFESOR")) {
+            formatted = "Profesor";
+        } else if (this.nombre.equals("ROLE_ASISTENTE")) {
+            formatted = "Asistente";
+        } else if (this.nombre.equals("ROLE_ALUMNO")) {
+            formatted = "Alumno";
+        }
+
+        return formatted;
     }
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head
+    th:replace="fragments/head :: head(title='Modificar ', css='/css/registration.css')"
+  >
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <nav class="nav justify-content-end">
+          <a class="nav-link" th:href="@{/logout}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+        </nav>
+        <div class="row vh-100 align-items-center justify-content-center">
+          <div class="sign-up-form col col-12 col-md-5">
+            <h3 class="form-signin-heading">Acualizar edificio</h3>
+            <form
+              autocomplete="off"
+              action="register"
+              th:action="@{/building/update}"
+              th:object="${building}"
+              method="post"
+              class="form-horizontal"
+              role="form"
+            >              
+              <input type="hidden" id="id" name="id" th:field="*{id}" />
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  aria-label="Name"
+                  class="form-control"
+                  placeholder="Name"
+                  th:field="*{edificio}"
+                  th:value="${building.edificio}"
+                />
+                <label for="floatingInput">Nombre</label>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+              </div>
+              <br />
+              <div
+                th:if="${successMessage}"
+                class="alert alert-success"
+                th:utext="${successMessage}"
+                role="alert"
+              ></div>
+            </form>
+            <button onclick="history.back()" class="btn btn-outline-secondary btn-sm">Volver</button>
+            <a th:href="@{/index}">Inicio</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer th:replace="fragments/footer :: footer"></footer>
+  </body>
+</html>

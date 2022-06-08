@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head th:replace="fragments/head :: head(title='Notas de pedido ', css='/css/registration.css')">
+    </head>
+
+<body>
+    <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <a class="text-decoration-none text-reset" th:href="@{/index}">
+                        <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                        <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+
+                    </a>
+                    <div>
+                        <h1>Bandeja de entrada de notas de pedido</h1>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    </br>
+                    <h3>Mis notas de pedido</h3>
+                    <table
+                        class="table table-hover table-responsive-md"
+                        th:unless="${#lists.isEmpty(petitions)}"
+                        >
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Turno</th>
+                                <th scope="col">Cant. de estudiantes</th>
+                                <th scope="col">Materia</th>
+                                <th scope="col">Carrera</th>
+                                <th scope="col">Observaciones</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="petition: ${petitions}" 
+                                th:classappend="${(petition.getEstado == 'aceptada' ? 'bg-success p-2 bg-opacity-25' : '') + (petition.getEstado == 'rechazado' ? 'bg-danger p-2 bg-opacity-25' : '')}">
+                                <td th:text="${petition.getFecha}"></td>
+                                <td th:text="${petition.getTurno}"></td>
+                                <td th:text="${petition.getCantEstudiantes}"></td>
+                                <td th:text="${petition.getMateria.getMateria}"></td>
+                                <td th:text="${petition.getCarrera.getCarrera}"></td>
+                                <td th:text="${petition.getObservaciones}"></td>
+                                <td>
+                                    <th:block th:switch="${petition.getEstado}">
+                                        <span th:case="'enProceso'">
+                                            🕑 Pendiente
+                                        </span>
+                                        <span th:case="'aceptada'">
+                                            ✅ Aceptada
+                                        </span>
+                                        <span th:case="'rechazado'">
+                                            🚫 Rechazada
+                                        </span>
+                                    </th:block>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a role="button" th:href="@{/index}" class="btn btn-primary">Volver</a>
+    </div>
+</br>
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

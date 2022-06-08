@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="en"
+>
+  <head
+    th:replace="fragments/head :: head(title='Nota de pedido', css='/css/registration.css')"
+  ></head>
+
+  <body>
+    <main>
+      <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+        <div class="row vh-100 align-items-center justify-content-center">
+          <div class="sign-up-form col col-12 col-md-5">
+            <h3 class="form-signin-heading">Nuevo Pedido</h3>
+            <form
+              autocomplete="off"
+              action="register"
+              th:action="@{/petitions/create}"
+              th:object="${petition}"
+              method="post"
+              class="form-horizontal"
+              role="form"
+            >
+              <div class="form-floating mb-3">
+                <input
+                  type="date"
+                  id="fecha"
+                  name="fecha"
+                  aria-label="Date"
+                  class="form-control"
+                  placeholder="Fecha"
+                  th:field="*{fecha}"
+                  th:value="${petition.fecha}"
+                />
+                <label for="date">Fecha</label>
+              </div>
+              <div class="form-floating mb-3 col-12">
+                <select
+                  id="turno"
+                  th:field="*{turno}"
+                  class="form-select"
+                  aria-label="Turno"
+                >
+                  <option th:value="'M'">Mañana</option>
+                  <option th:value="'T'">Tarde</option>
+                  <option th:value="'N'">Noche</option>
+                </select>
+                <label for="Turno">Turno</label>
+              </div>
+              <div class="form-floating  mb-3 col-12">
+                <input
+                  type="number"
+                  id="cantEstudiantes"
+                  name="cantEstudiantes"
+                  aria-label="Estudiantes"
+                  class="form-control"
+                  placeholder="Estudiantes"
+                  th:field="*{cantEstudiantes}"
+                  th:value="${petition.cantEstudiantes}"
+                />
+                <label for="floatingInput">Estudiantes</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select
+                  id="idMateria"
+                  th:field="*{idMateria}"
+                  class="form-select"
+                  aria-label="Materia"
+                >
+                  <option th:value="1">Programación</option>
+                  <option th:value="2">Algoritmos</option>
+                  <option th:value="3">Org.Computadoras</option>
+                  <option th:value="4">Matemáticas</option>
+                  <option th:value="5">Arq.Computadoras</option>
+                  <option th:value="6">Pensamiento Científico</option>
+                  <option th:value="7">Matemáticas II</option>
+                </select>
+
+                <label for="Materia">Materia</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <select
+                  id="idCarrera"
+                  th:field="*{idCarrera}"
+                  class="form-select"
+                  aria-label="Carrera"
+                >
+                  <option th:value="1">Gestion Ambiental</option>
+                  <option th:value="2">Economía Empresarial</option>
+                  <option th:value="3">Economía política</option>
+                  <option th:value="4">
+                    Ciencia y teconología de Alimentos
+                  </option>
+                  <option th:value="5">Lic. Turismo</option>
+                  <option th:value="6">Ciclo de licenciatura turismo</option>
+                  <option th:value="7">Sistemas</option>
+                  <option th:value="8">Tecnologías ferroviarias</option>
+                  <option th:value="9">Lic. Logística</option>
+                  <option th:value="10">Ciclo de licenciatura Logística</option>
+                </select>
+                <label for="Carrera">Carrera</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <!-- ÁREA PARA OBERSVARCIONES. SE PUEDE USAR PARA PEDIR AULAS CON PROYECTOR. -->
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  cols="100"
+                  name="observaciones"
+                  spellcheck="false"
+                  th:field="*{observaciones}"
+                  th:value="${petition.observaciones}"
+                  aria-label="Observaciones"
+                  id="obser"
+                  style="height: 125px"
+                >
+                </textarea>
+                <label for="obser">Observaciones</label>
+              </div>
+
+              <!-- TODO: AGREGAR PETICION A BD -->
+              <!-- <a th:href="@{/index}" class="btn btn-primary">Volver</a> -->
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </br>
+            <div
+            th:if="${successMessage}"
+            class="alert alert-success"
+            th:utext="${successMessage}"
+            role="alert"
+            ></div>
+        </form>
+    </br>
+        <button onclick="history.back()" class="btn btn-outline-secondary btn-sm">Volver</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer th:replace="fragments/footer :: footer"></footer>
+  </body>
+</html>
