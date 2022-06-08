@@ -29,8 +29,10 @@ public class PetitionsController {
     @Secured("ROLE_ADMIN")
     @GetMapping("/made")
     public ModelAndView petitions() {
-
+        // aca se ve el listado de todas las vistas
         ModelAndView mV = new ModelAndView(ViewRouteHelper.PETITIONS_LST);
+
+        mV.addObject("petitions", petitionService.getAll());
 
         return mV;
     }
@@ -50,15 +52,19 @@ public class PetitionsController {
     }
 
     @Secured("ROLE_ADMIN")
+    @GetMapping("/accept/{id}/for-space/{idSpace}")
+    public ModelAndView accept(@PathVariable int id, @PathVariable int idSpace) {
+        petitionService.aceptar(id, idSpace);
+
+        return new ModelAndView("redirect:/petitions/made");
+    }
+
+    @Secured("ROLE_ADMIN")
     @GetMapping("/decline/{id}")
     public ModelAndView decline(@PathVariable int id) {
-        ModelAndView mV = new ModelAndView(ViewRouteHelper.PETITIONS_LST);
+        petitionService.rechazar(id);
 
-        PetitionNote petitionNote = petitionService.getById(id);
-
-        petitionService.rechazar(petitionNote);
-
-        return mV;
+        return new ModelAndView("redirect:/petitions/made");
     }
 
     // REDIRIGE A NUEVAS NOTAS DE PEDIDO
