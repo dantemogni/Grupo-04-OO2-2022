@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head th:replace="fragments/head :: head(title='Espacios ', css='/css/registration.css')">
+    </head>
+
+<body>
+    <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <a class="text-decoration-none text-reset" th:href="@{/index}">
+                        <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                        <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+                      </a>
+                    <div>
+                        <h1>Listado general disponibilidad de espacios</h1>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table
+                        class="table table-hover table-responsive-md"
+                        th:unless="${#lists.isEmpty(spaces)}"
+                        >
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Turno</th>
+                                <th scope="col">Libre</th>
+                                <th scope="col">Aula</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="space: ${spaces}">
+                            <td
+                                th:text="${space.getFecha}"
+                            ></td>
+                            <td
+                                th:text="${space.getTurno}"
+                            ></td>
+                            <td
+                                th:text="${space.isLibre} ? '✅ Si' : '❌ No'"
+                            ></td>
+                            <td
+                                th:text="'N°'+${space.getAula.getNumero}+', '+${space.getAula.getEdificio.getEdificio}"
+                            ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+    </div>
+</br>
+
+</body>
+
+</html>

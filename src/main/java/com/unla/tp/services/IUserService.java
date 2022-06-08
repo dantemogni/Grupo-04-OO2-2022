@@ -7,7 +7,7 @@ import com.unla.tp.models.UserRequest;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService extends UserDetailsService {
+public interface IUserService extends UserDetailsService {
     public User createUser(UserRequest userRequest);
 
     public User updateUser(UserRequest userRequest);

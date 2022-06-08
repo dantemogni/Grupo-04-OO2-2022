@@ -2,6 +2,246 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head></head>
   <body>
+        <!-- TRADITIONAL Details Modal -->
+      <div
+        th:fragment="details"
+        class="modal fade"
+        id="traditionalDetailsModal"
+        tabindex="-1"
+        aria-labelledby="detailsModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="detailsModalLabel">Detalle aula</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+
+              <table
+                  class="table table-hover table-responsive-md"
+                  >
+                  <thead>
+                      <tr>
+                          <th scope="col">Cant. Bancos</th>
+                          <th scope="col">Pizarron</th>
+                          <th scope="col">Tiene proyector</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                      <td
+                          id="classroomBancos"
+                      ></td>
+                      <td
+                          id="classroomPizarron"
+                      ></td>
+                      <td
+                          id="classroomProyector"
+                      ></td>
+                      </tr>
+                  </tbody>
+                </table>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- LAB Details Modal -->
+       <div
+       th:fragment="details"
+       class="modal fade"
+       id="labDetailsModal"
+       tabindex="-1"
+       aria-labelledby="detailsModalLabel"
+       aria-hidden="true"
+     >
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="detailsModalLabel">Detalle aula</h5>
+             <button
+               type="button"
+               class="btn-close"
+               data-bs-dismiss="modal"
+               aria-label="Close"
+             ></button>
+           </div>
+           <div class="modal-body">
+
+             <table
+                 class="table table-hover table-responsive-md"
+                 >
+                 <thead>
+                     <tr>
+                         <th scope="col">Cant. PC</th>
+                         <th scope="col">Cant. Sillas</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                     <td
+                         id="classroomPc"
+                     ></td>
+                     <td
+                         id="classroomSillas"
+                     ></td>
+                     </tr>
+                 </tbody>
+               </table>
+             <button
+               type="button"
+               class="btn btn-secondary"
+               data-bs-dismiss="modal"
+             >
+               Cerrar
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+
+      <!-- Traditional PetitionNote Details Modal -->
+    <div
+      th:fragment="details-traditional-note"
+      class="modal fade"
+      id="traditionalPetitionDetailsModal"
+      tabindex="-1"
+      aria-labelledby="detailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Detalle aula</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+            <table
+                class="table table-hover table-responsive-md"
+                >
+                <thead>
+                    <tr>
+                        <th scope="col">Cant. Bancos</th>
+                        <th scope="col">Pizarron</th>
+                        <th scope="col">Tiene proyector</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td
+                        id="classroomBancos"
+                    ></td>
+                    <td
+                        id="classroomPizarron"
+                    ></td>
+                    <td
+                        id="classroomProyector"
+                    ></td>
+                    </tr>
+                </tbody>
+              </table>
+            <div class="modal-footer">
+              <form
+                id="acceptLink"
+                method="get"
+              >
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAB PetitionNote Details Modal -->
+    <div
+      th:fragment="details-lab-note"
+      class="modal fade"
+      id="labDetailsPetitionModal"
+      tabindex="-1"
+      aria-labelledby="detailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Detalle aula</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+            <table
+                class="table table-hover table-responsive-md"
+                >
+                <thead>
+                    <tr>
+                        <th scope="col">Cant. PC</th>
+                        <th scope="col">Cant. Sillas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td
+                        id="classroomPc"
+                    ></td>
+                    <td
+                        id="classroomSillas"
+                    ></td>
+                    </tr>
+                </tbody>
+              </table>
+            <div class="modal-footer">
+            <form
+              id="acceptLink"
+              method="get"
+            >
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Delete Modal -->
     <div
       th:fragment="delete"
@@ -14,7 +254,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Borrar usuario</h5>
+            <h5 class="modal-title" id="deleteModalLabel">Borrar</h5>
             <button
               type="button"
               class="btn-close"
@@ -23,7 +263,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <p>Atención! Usted borarrá al usuario:</p><em><span class="text-danger" id="itemContentDelete"></span></em>
+            <p>Atención! Usted borarrá:</p><em><span class="text-danger" id="itemContentDelete"></span></em>
             <form
               id="itemIdDelete"
               method="get"

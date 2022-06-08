@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head th:replace="fragments/head :: head(title='Nota de Pedido ', css='/css/registration.css')">
+    </head>
+
+<body>
+    <div class="container">
+        <nav class="nav justify-content-end">
+            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <a class="text-decoration-none text-reset" th:href="@{/index}">
+                        <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                        <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+                      </a>
+                    <div>
+                        <h1>Detalle Nota de Pedido</h1>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-info" role="alert">
+                        <ul>
+                            <li>📆 <strong>Fecha: </strong><span th:text="${petition.getFecha}"></span></li>
+                            <li>⏰ <strong>Turno: </strong><span th:text="${petition.getTurno}"></span></li>
+                            <li>👨‍🎓 <strong>Cantidad de estudiantes: </strong><span th:text="${petition.getCantEstudiantes}"></span></li>
+                            <li>📚 <strong>Materia: </strong><span th:text="${petition.getMateria.getMateria}"></span></li>
+                            <li>🎒 <strong>Carrera: </strong><span th:text="${petition.getCarrera.getCarrera}"></span></li>
+                            <li>❗ <strong>Observaciones: </strong><span th:text="${petition.getObservaciones}"></span></li>
+                        </ul>
+                    </div>
+                    <h3>Aulas disponibles que se ajustan al pedido:</h3>
+                </br>
+                    <div class="alert alert-danger" role="alert" th:if="${#lists.isEmpty(matchedSpaces)}">
+                        <span>No hay aulas que se ajusten al pedido.</span>
+                    </div>
+                    </br>
+                    <table
+                        class="table table-hover table-responsive-md"
+                        th:unless="${#lists.isEmpty(matchedSpaces)}"
+                    >
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Turno</th>
+                                <th scope="col">Libre</th>
+                                <th scope="col">Aula</th>
+                                <th class="w-auto" scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="matchedSpace: ${matchedSpaces}">
+                                <td
+                                    th:text="${matchedSpace.getFecha}"
+                                ></td>
+                                <td
+                                    th:text="${matchedSpace.getTurno}"
+                                ></td>
+                                <td
+                                    th:text="${matchedSpace.isLibre} ? '✅ Si' : '❌ No'"
+                                ></td>
+                                <td
+                                    th:text="'N°'+${matchedSpace.getAula.getNumero}+', '+${matchedSpace.getAula.getEdificio.getEdificio}"
+                                ></td>
+                                <td>
+                                    <button
+                                        th:if="${matchedSpace.getAula instanceof T(com.unla.tp.entities.Tradicional)}"
+                                        type="button"
+                                        id="detail"
+                                        class="btn btn-primary btn-sm"
+                                        data-bs-toggle="modal"
+                                        th:data-spaceid="${matchedSpace.getId}"
+                                        th:data-petitionid="${petition.getId}"
+                                        th:data-bancos="${matchedSpace.getAula.getCantBancos}"
+                                        th:data-pizarron="${matchedSpace.getAula.getPizarron}"
+                                        th:data-proyector="${matchedSpace.getAula.isTieneProyector}"
+                                        data-bs-target="#traditionalPetitionDetailsModal"
+                                    >
+                                        <i class="fas fa-info-circle"></i> Ver detalle y cerrar pedido
+                                    </button>
+                                    <button
+                                        th:if="${matchedSpace.getAula instanceof T(com.unla.tp.entities.Laboratorio)}"
+                                        type="button"
+                                        id="detail"
+                                        class="btn btn-primary btn-sm"
+                                        data-bs-toggle="modal"
+                                        th:data-spaceid="${matchedSpace.getId}"
+                                        th:data-petitionid="${petition.getId}"
+                                        th:data-pc="${matchedSpace.getAula.getCantPc}"
+                                        th:data-sillas="${matchedSpace.getAula.getCantSillas}"
+                                        data-bs-target="#labDetailsPetitionModal"
+                                    >
+                                        <i class="fas fa-info-circle"></i> Ver detalle y cerrar pedido
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a
+                        th:href="@{/petitions/decline/{id}(id=${petition.getId})}"
+                        role="button"
+                        class="btn btn-outline-danger"
+                        >Rechazar Pedido</a>
+                </br>
+                </div>
+            </div>
+        </div>
+    </br>
+
+    <button onclick="history.back()" class="btn btn-primary">Volver</button>
+    </div>
+</br>
+    <!-- Modals -->
+    <div th:replace="fragments/modals :: details-traditional-note"></div>
+    <div th:replace="fragments/modals :: details-lab-note"></div>
+    <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
+</body>
+
+</html>

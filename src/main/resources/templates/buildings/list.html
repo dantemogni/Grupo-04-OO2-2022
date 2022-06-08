@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  lang="en"
+>
+  <head
+    th:replace="fragments/head :: head(title='Edificios ', css='/css/registration.css')"
+  >
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="nav justify-content-end">
+        <a class="nav-link" th:href="@{/logout}"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </nav>
+      <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <a class="text-decoration-none text-reset" th:href="@{/index}">
+              <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+              <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+            </a>
+            <div>
+              <h1>Listado de edificios</h1>
+            </div>
+          </div>
+          <div class="panel-body">
+            <table
+              class="table table-hover table-responsive-md"
+              th:unless="${#lists.isEmpty(buildings)}"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">Edificio</th>
+                  <th
+                    sec:authorize="hasRole('ROLE_ADMIN')"
+                    class="w-auto"
+                    scope="col"
+                  >
+                    Acciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="building: ${buildings}">
+                  <td th:text="${building.getEdificio}"></td>
+                  <td>
+                    <button
+                      sec:authorize="hasRole('ROLE_ADMIN')"
+                      type="button"
+                      id="delete"
+                      class="btn btn-outline-danger btn-sm"
+                      data-bs-toggle="modal"
+                      th:data-content="${building.getEdificio}"
+                      th:data-id="${building.getId}"
+                      data-bs-target="#deleteModal"
+                    >
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <a th:href="@{/index}" class="btn btn-primary">Volver</a>
+    </div>
+    <!-- Delete Modal -->
+    <div th:replace="fragments/modals :: delete"></div>
+    <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
+  </body>
+</html>

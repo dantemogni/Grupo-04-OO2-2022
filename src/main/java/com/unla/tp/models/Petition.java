@@ -2,6 +2,8 @@ package com.unla.tp.models;
 
 import java.time.LocalDate;
 
+import com.unla.tp.utils.Const;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,8 +23,8 @@ public class Petition {
     private int idMateria;
     private String observaciones;
     private int idCarrera;
-    //EL ESTADO PUEDE SER EN PROCESO-ACEPTADO-RECHAZADO
+    // EL ESTADO PUEDE SER EN PROCESO-ACEPTADO-RECHAZADO
     @Builder.Default
-    private String estado = "enProceso";
-    
+    private String estado = Const.STATUS_PROCESSING;
+
 }

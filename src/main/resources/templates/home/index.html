@@ -1,46 +1,105 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="en"
+>
+  <head th:replace="fragments/head :: head(title='Home', css='/css/home.css')">
+  </head>
 
-<head th:replace="fragments/head :: head(title='Home', css='/css/home.css')">
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <nav class="nav justify-content-end">
-            <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a
+      <nav class="nav justify-content-end">
+        <a class="nav-link" th:href="@{/logout}"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
         >
       </nav>
 
       <div class="panel-group">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25"/>
+            <a class="text-decoration-none text-reset" th:href="@{/index}">
+              <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+              <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+            </a>
             <div>
-                <h1
-                th:text="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"
-              ></h1>
-              <p id="userHeader" th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"></p>
-              </div>
+            </br>
+          </br>
+              <h1 th:text="'Hola, ' + ${nombre} +' '+ ${apellido}+ '!'"></h1>
+              <p
+                id="userHeader"
+                th:text="'Usuario: @' + ${username} + ' - Rol: ' + ${userRole}"
+              ></p>
+            </div>
 
-            <a th:href="@{/register}" sec:authorize="hasRole('ROLE_ADMIN')" role="button" class="btn btn-outline-secondary">Registar usuario nuevo</a>
-            <a th:href="@{/userLst}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')" role="button" class="btn btn-outline-secondary">Ver lista de usuarios</a>
+            <h4>Panel de control</h4>
+
+            <a
+              th:href="@{/register}"
+              sec:authorize="hasRole('ROLE_ADMIN')"
+              role="button"
+              class="btn btn-outline-secondary"
+              >Registar usuario nuevo</a
+            >
+            <a
+              th:href="@{/userLst}"
+              sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
+              role="button"
+              class="btn btn-outline-secondary"
+              >Listado de usuarios</a
+            >
 
             <!-- VER NOTA DE PEDIDO PARA GESTIONAR VALIDACIONES -->
-            <a th:href="@{/manOrderNotes}" sec:authorize="hasRole('ROLE_ADMIN')" role="button" class="btn btn-outline-secondary">Notas de Pedido</a>
+            <a
+              th:href="@{/petitions/made}"
+              sec:authorize="hasRole('ROLE_ADMIN')"
+              role="button"
+              class="btn btn-outline-secondary"
+              >Consultar Notas de Pedido</a
+            >
 
             <!-- HACER NOTA DE PEDIDOS AL ADMINISTRADOR-->
 
-            <a th:href="@{/petitionNote}" sec:authorize="hasRole('ROLE_PROFESOR')" role="button" class="btn btn-outline-secondary">Nuevo Pedido</a>
-    </div>
-    <br />
-    </div>
-    </div>
-    </div>
+            <a
+              th:href="@{/petitions/create}"
+              sec:authorize="hasRole('ROLE_PROFESOR')"
+              role="button"
+              class="btn btn-outline-secondary"
+              >Nuevo Pedido</a
+            >
 
+            <br />
+            <br />
+            <a
+              th:href="@{/building/list}"
+              sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
+              role="button"
+              class="btn btn-outline-secondary"
+              >Consultar edificios</a
+            >
+            <a
+              th:href="@{/classroom/list}"
+              sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')"
+              role="button"
+              class="btn btn-outline-secondary"
+              >Consultar aulas</a
+            >
+          </div>
+          <br />
+          <a
+          th:href="@{/space/list}"
+          sec:authorize="hasRole('ROLE_ADMIN')"
+          role="button"
+          class="btn btn-outline-secondary"
+          >Consultar Disponibilidad general</a
+        >
+      </div>
+        </div>
+      </div>
+    </div>
 
     <footer th:replace="fragments/footer :: footer"></footer>
 
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
-</body>
-
+  </body>
 </html>

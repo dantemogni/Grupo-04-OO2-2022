@@ -13,7 +13,10 @@
         <div class="panel-group">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                    <a class="text-decoration-none text-reset" th:href="@{/index}">
+                        <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                        <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+                      </a>
                     <div>
                         <h1>Listado de usuarios</h1>
                         <a sec:authorize="hasRole('ROLE_AUDITOR')" th:href="@{/users/export/pdf}" role="button" class="btn btn-outline-danger"><i class="fas fa-file-download"></i> Exportar PDF</a>
@@ -21,7 +24,7 @@
                 </div>
                 <div class="panel-body">
                     <table
-                        class="table table-borderless table-hover table-responsive-md"
+                        class="table table-hover table-responsive-md"
                         th:unless="${#lists.isEmpty(users)}"
                         aria-describedby="User's todos"
                         >
@@ -80,8 +83,8 @@
                 </div>
             </div>
         </div>
-    <a th:href="@{/index}" class="btn btn-primary">Volver</a>
-    <!-- Delete Modal -->
+        <button onclick="history.back()" class="btn btn-primary">Volver</button>
+        <!-- Delete Modal -->
     <div th:replace="fragments/modals :: delete"></div>
     <script type="text/javascript" th:src="@{/scripts/modals.js}"></script>
 
