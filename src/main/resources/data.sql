@@ -155,7 +155,17 @@ INSERT INTO `laboratorio` (id, cant_pc, cant_sillas) VALUES (48, 35, 39);
 
 
 -- NOTA PEDIDO --
-INSERT INTO `nota_pedido` (id, cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id) VALUES (1, 48, "enProceso", "2022-03-02", "Con proyector", "M", 7, 1);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (48, "enProceso", "2022-03-02", "Con proyector", "M", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (70, "enProceso", "2022-03-08", "Pizarron blanco de marcador", "N", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (82, "enProceso", "2022-03-14", "Pizarron blanco de marcador", "T", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (50, "enProceso", "2022-03-06", "Con proyector", "M", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (39, "enProceso", "2022-03-30", "-", "M", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (78, "enProceso", "2022-03-18", "Calefaccionado", "T", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (60, "enProceso", "2022-03-20", "Con proyector", "T", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (88, "enProceso", "2022-03-22", "-", "M", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (62, "enProceso", "2022-03-13", "Con proyector", "N", 7, 1, 3);
+INSERT INTO `nota_pedido` (cant_estudiantes, estado, fecha, observaciones, turno, carrera_id, materia_id, usuario_id) VALUES (53, "enProceso", "2022-03-10", "Con proyector", "N", 7, 1, 3);
+
 
 -- ESPACIOS PARA TODAS LAS AULAS EN EL MES DE MARZO--
 INSERT INTO `espacio` (fecha, libre, turno, aula_id) VALUES ('2022-03-01', 1, 'M', 1);
