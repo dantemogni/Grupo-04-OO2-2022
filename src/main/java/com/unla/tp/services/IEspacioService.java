@@ -20,4 +20,9 @@ public interface IEspacioService {
     public void agregarEspacioMes(int mes, int anio, char turno, Aula aula) throws Exception;
 
     public void inicializarEspacios(int mes, int anio) throws Exception;
+
+    public Espacio getById(int id);
+
+    public void updateStatus(int id, boolean libre);
+
 }

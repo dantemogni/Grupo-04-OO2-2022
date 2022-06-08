@@ -71,7 +71,7 @@ public class EspacioServiceImpl implements IEspacioService {
             }
 
             // Si está disponible, el turno pedido coincide y hay sufientes bancos...
-            if (s.isLibre() && s.getTurno() == turno && bancos >= cantAlumnos) {
+            if (s.isLibre() && s.getTurno() == turno && bancos >= cantAlumnos && s.getFecha().equals(fecha)) {
                 matchedSpaces.add(s);
             }
         }
@@ -81,8 +81,11 @@ public class EspacioServiceImpl implements IEspacioService {
 
     @Override
     public void agregarEspacioMes(int mes, int anio, char turno, Aula aula) throws Exception {
-
         for (int i = 1; i <= Funciones.traerCantDiasDeUnMes(anio, mes); i++) {
+            // System.out.println("INSERT INTO `espacio` (fecha, libre, turno, aula_id)
+            // VALUES ('"
+            // + LocalDate.of(anio, mes, i) + "', 1, '" + turno + "', " + aula.getId() +
+            // ");");
             agregar(LocalDate.of(anio, mes, i), turno, aula, true);
         }
     }
@@ -91,9 +94,9 @@ public class EspacioServiceImpl implements IEspacioService {
     public void inicializarEspacios(int mes, int anio) throws Exception {
         // Genera todos los espacios para usarlos luego
         List<Aula> aulas = aulaRepository.findAll();
-
         for (Aula a : aulas) {
             agregarEspacioMes(mes, anio, 'M', a); // mañana
+            agregarEspacioMes(mes, anio, 'T', a); // tarde
             agregarEspacioMes(mes, anio, 'N', a); // noche
         }
     }
@@ -106,6 +109,18 @@ public class EspacioServiceImpl implements IEspacioService {
     @Override
     public List<Espacio> getAll() {
         return espacioRepository.findAll();
+    }
+
+    @Override
+    public Espacio getById(int id) {
+        return espacioRepository.getById(id);
+    }
+
+    @Override
+    public void updateStatus(int id, boolean libre) {
+        Espacio e = espacioRepository.getById(id);
+        e.setLibre(libre);
+        espacioRepository.save(e);
     }
 
 }
