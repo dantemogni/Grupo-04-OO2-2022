@@ -16,8 +16,6 @@ más una interfaz web para probar el software.
 
 ---
 ### Integrantes:
-- Julen Tadeo Fourcade
-- Luca Gonzalo Ledesma
 - Dante Joaquin Mogni
 - Franco Nordinelli
 
