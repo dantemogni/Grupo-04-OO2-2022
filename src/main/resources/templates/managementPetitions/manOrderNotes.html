@@ -13,8 +13,11 @@
         <div class="panel-group">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
-                    <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+                    <a class="text-decoration-none text-reset" th:href="@{/index}">
+                        <img th:src="@{/img/unla25.jpg}" width="100" alt="Logo Unla 25" />
+                        <span class="fs-3">UNLa Sistema Gestión de Aulas</span><span class="fs-6">  v1.0</span>
+
+                    </a>
                     <div>
                         <h1>Bandeja de entrada de notas de pedido</h1>
                     </div>
@@ -133,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <button onclick="history.back()" class="btn btn-primary">Volver</button>
+        <a role="button" th:href="@{/index}" class="btn btn-primary">Volver</a>
     </div>
 </br>
     <footer th:replace="fragments/footer :: footer"></footer>
