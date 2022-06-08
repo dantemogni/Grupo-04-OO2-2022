@@ -94,7 +94,16 @@
     var content = button.data("content");
     var modal = $(this);
 
-    var deleteLink = "/delete/"+id
+    var type = button.data("type");
+    var deleteLink;
+
+    if (type == "user") {
+      deleteLink = "/delete/"+id
+    } else if (type == "classroom"){
+      deleteLink = "/classroom/delete/"+id
+    } else if (type == "building"){
+      deleteLink = "/building/delete/"+id
+    }
   
     modal.find("#itemIdDelete").attr("action", deleteLink);
     modal.find("#itemContentDelete").text(content);

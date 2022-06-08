@@ -9,5 +9,5 @@ import com.unla.tp.entities.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Serializable> {
-
+    public Role getByNombre(String nombre);
 }
