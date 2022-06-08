@@ -1,13 +1,14 @@
 package com.unla.tp.services.implementation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unla.tp.entities.PetitionNote;
-import com.unla.tp.models.Petition;
-import com.unla.tp.respositories.AulaRepository;
+import com.unla.tp.entities.User;
+import com.unla.tp.models.PetitionRequest;
 import com.unla.tp.respositories.CarreraRepository;
 import com.unla.tp.respositories.MateriaRepository;
 import com.unla.tp.respositories.PetitionRepository;
@@ -21,9 +22,6 @@ public class PetitionServiceImpl implements IPetitionService {
     private IEspacioService espacioService;
 
     @Autowired
-    private AulaRepository aulaRepository;
-
-    @Autowired
     private PetitionRepository petitionRepository;
 
     @Autowired
@@ -33,25 +31,19 @@ public class PetitionServiceImpl implements IPetitionService {
     private MateriaRepository materiaRepository;
 
     @Override
-    public PetitionNote insert(Petition petition) {
-
+    public PetitionNote insert(PetitionRequest petition, User user) {
         PetitionNote petitionEntitie = new PetitionNote();
-
         petitionEntitie.setCantEstudiantes(petition.getCantEstudiantes());
-
         petitionEntitie.setCarrera(carreraRepository.getById(petition.getIdCarrera()));
-
         petitionEntitie.setMateria(materiaRepository.getById(petition.getIdMateria()));
-
-        petitionEntitie.setFecha(petition.getFecha());
-
+        petitionEntitie.setFecha(LocalDate.parse(petition.getFecha()));
         petitionEntitie.setObservaciones(petition.getObservaciones());
-
         petitionEntitie.setTurno(petition.getTurno());
+        petitionEntitie.setUsuario(user);
+
         return petitionRepository.save(petitionEntitie);
     }
 
-    // WIP
     @Override
     public void aceptar(int idPeticion, int idEspacio) {
 
@@ -87,6 +79,11 @@ public class PetitionServiceImpl implements IPetitionService {
     @Override
     public List<PetitionNote> getAll() {
         return petitionRepository.findAll();
+    }
+
+    @Override
+    public List<PetitionNote> getAllByUserId(int userId) {
+        return petitionRepository.getAllByUsuarioId(userId);
     }
 
 }
