@@ -53,15 +53,18 @@ public class PetitionServiceImpl implements IPetitionService {
 
     // WIP
     @Override
-    public void aceptar(Petition petition, Espacio espacio) {
+    public void aceptar(int idPeticion, int idEspacio) {
 
         // El usuario que administra las notas de pedido puede aceptar y rechazar según
         // disponibilidad.
         // Al aceptar, se setea "ocupado -> true" en el objeto Espacio.
         try {
-            // espacioService.agregar(petition.getFecha(), petition.getTurno(),
-            // aulaRepository.getById(petition.getIdAula()), false);
-            espacio.setLibre(false);
+            PetitionNote petition = petitionRepository.getById(idPeticion);
+            petition.setEstado(Const.STATUS_OK);
+            petitionRepository.save(petition);
+
+            espacioService.updateStatus(idEspacio, false);
+
         } catch (Exception e) {
             // si hay excepcion, no se pudo ocupar
             System.err.println(e.getMessage());
@@ -70,13 +73,20 @@ public class PetitionServiceImpl implements IPetitionService {
     }
 
     @Override
-    public void rechazar(PetitionNote petition) {
-        petition.setEstado(Const.STATUS_DECLINE);
+    public void rechazar(int id) {
+        PetitionNote p = petitionRepository.getById(id);
+        p.setEstado(Const.STATUS_DECLINE);
+        petitionRepository.save(p);
     }
 
     @Override
     public PetitionNote getById(int id) {
         return petitionRepository.getById(id);
+    }
+
+    @Override
+    public List<PetitionNote> getAll() {
+        return petitionRepository.findAll();
     }
 
 }
