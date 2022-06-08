@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.tp.controllers.helpers.ViewRouteHelper;
+import com.unla.tp.services.IRoleService;
 import com.unla.tp.services.IUserService;
 
 @Controller
@@ -16,6 +17,9 @@ import com.unla.tp.services.IUserService;
 public class HomeController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IRoleService roleService;
 
     @GetMapping(value = { "index", "/" })
     public ModelAndView index() {
@@ -28,21 +32,12 @@ public class HomeController {
         modelAndView.addObject("nombre", userEntity.getNombre());
         modelAndView.addObject("apellido", userEntity.getApellido());
 
-        String userRole = userDetails.getAuthorities().stream().toArray()[0].toString();
+        String userRole = userDetails.getAuthorities().stream().toArray()[0].toString(); // Obtiene el nombre del rol de
+                                                                                         // la pos. 0
+                                                                                         // del listado de roles del
+                                                                                         // usuario
 
-        if (userRole.equals("ROLE_ADMIN")) {
-            userRole = "Administrador";
-        } else if (userRole.equals("ROLE_AUDITOR")) {
-            userRole = "Auditor";
-        } else if (userRole.equals("ROLE_PROFESOR")) {
-            userRole = "Profesor";
-        } else if (userRole.equals("ROLE_ASISTENTE")) {
-            userRole = "Asistente";
-        } else if (userRole.equals("ROLE_ALUMNO")) {
-            userRole = "Alumno";
-        }
-
-        modelAndView.addObject("userRole", userRole);
+        modelAndView.addObject("userRole", roleService.getByNombre(userRole).toString());
 
         return modelAndView;
     }
