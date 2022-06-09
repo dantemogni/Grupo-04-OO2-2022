@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public ModelAndView createNewUser(@Valid UserRequest user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid @ModelAttribute("userSignUpRequest") UserRequest user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.USER_REGISTRATION);
 
         modelAndView.addObject("userSignUpRequest", user);
